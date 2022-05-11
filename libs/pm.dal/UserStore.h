@@ -3,18 +3,8 @@
 
 namespace pm::dal
 {
-	struct User
-	{
-		size_t id;
-		string firstName;
-		string lastName;
-		string email;
-		unsigned short age;
-		string passwordHash;
-		time_t createdOn;
-	};
-
-	struct UserStore
+	
+	/*struct UserStore
 	{
 		static int lastId;
 
@@ -31,5 +21,5 @@ namespace pm::dal
 		pm::type::User getUserByEmail(std::string& email);
 	};
 
-	int pm::dal::UserStore::lastId = 0;
+	int pm::dal::UserStore::lastId = 0;*/
 }

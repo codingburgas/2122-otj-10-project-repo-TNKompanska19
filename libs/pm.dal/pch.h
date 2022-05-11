@@ -9,7 +9,7 @@
 
 // add headers that you want to pre-compile here
 #include <iostream>
-#include <vector>
+#include <fstream>
 #include <string>
 
 #include "UserStore.h"
