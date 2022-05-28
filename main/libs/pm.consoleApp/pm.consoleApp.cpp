@@ -129,17 +129,18 @@ namespace pm::consoleApp
 	void mainMenu()
 	{
 		teamFigure(0, 33);
-		border(4, 0, 60);
-		label(13, 0);
-		button(43, 9);
-		button(43, 14);
-		button(43, 19);
-		button(43, 24);
-		textInButton(51, 11, "Log in");
-		textInButton(48, 16, "Registration");
-		textInButton(47, 21, "Change password");
-		textInButton(52, 26, "Exit");
+		border(4, 0, 51);
+		label(30, 1);
+		button(43, 11);
+		button(43, 16);
+		button(43, 21);
+		button(43, 26);
+		textInButton(51, 13, "Log in");
+		textInButton(48, 18, "Registration");
+		textInButton(47, 23, "Change password");
+		textInButton(52, 28, "Exit");
 		computerFigure(68, 30);
+		border(107, 0, 51);
 	}
 }
 
