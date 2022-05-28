@@ -4,6 +4,6 @@
 using namespace std;
 int main()
 {
-	pm::consoleApp::mainMenu();
+	pm::dal::sth();
 }
 
