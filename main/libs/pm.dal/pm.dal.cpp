@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <exception>
-
 #include "pch.h"
 #include "..\nanodbc\nanodbc.h"
 
@@ -15,7 +14,7 @@ namespace pm::dal
     }
     void sth() try
     {
-        auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=(local)\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
+        auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
         nanodbc::connection conn(connstr);
 
         string query = NANODBC_TEXT("SELECT TOP 10 * FROM Users");
@@ -34,27 +33,22 @@ namespace pm::dal
     }
 
 
-    void insertDB() try
+    void insertDB(string firstName, string lastName, int age, string email, string pass) try
     {
-        auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=(local)\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
-        nanodbc::connection conn(connstr);
+        nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
+        nanodbc::statement statement(connection);
 
-        cout << "Enter name:\n";
-        string firstName;
-        cin >> firstName;
-        cout << "\n Enter last name: \n";
-        string lastName;
-        cin >> lastName;
-        cout << "\n Enter age: \n";
-        int age;
-        cin >> age;
-        cout << "\n Enter email: \n";
-        string email;
-        cin >> email;
-        cout << "\n Enter pass: \n";
-        string pass;
-        cin >> pass;
-        auto result = nanodbc::execute(conn, "INSERT INTO Users ([First Name], [Last Name], Age, Email, [Password]) VALUES ('" + firstName +"', '" +lastName  + "', " + to_string(age) + ", '" +email + "', '" + pass + "')");
+        prepare(statement,"INSERT INTO Users([First Name], [Last Name], Age, Email, [Password]) VALUES (?,?,?,?,?)");
+
+        statement.bind(0, firstName.c_str());
+        statement.bind(1, lastName.c_str());
+        statement.bind(2, &age);
+        statement.bind(3, email.c_str());
+        statement.bind(4, pass.c_str());
+
+        execute(statement);
+        // execute(statement);
+        //cout << "Aff rows: " << result.affected_rows();
     }
     catch (std::exception& e)
     {
