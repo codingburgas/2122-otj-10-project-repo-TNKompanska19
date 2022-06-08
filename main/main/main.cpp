@@ -4,7 +4,7 @@
 using namespace std;
 int main()
 {
-    cout << "Enter first name:\n";
+    /*cout << "Enter first name:\n";
     string firstName;
     cin >> firstName;
     cout << "\n Enter last name: \n";
@@ -20,6 +20,9 @@ int main()
     string pass;
     cin >> pass;
 
-    pm::dal::insertDB(firstName, lastName, age, email, pass);
+    pm::dal::insertDB(firstName, lastName, age, email, pass);*/
+
+
+    pm::consoleApp::mainMenu();
 }
 

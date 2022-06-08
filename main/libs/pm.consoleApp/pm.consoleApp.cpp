@@ -6,6 +6,7 @@ namespace pm::consoleApp
 {
 	void computerFigure(int x, int y)
 	{
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 9);
 		pm::tools::consoleCoordinates(x, y);
 		cout << "     ____________________________\n";
 		pm::tools::consoleCoordinates(x, y + 1);
@@ -48,12 +49,14 @@ namespace pm::consoleApp
 
 	void label(int x, int y)
 	{
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 13);
 		pm::tools::consoleCoordinates(x, y);
 		cout << "  _____           _                                 ";
 		pm::tools::consoleCoordinates(x, y+1);
 		cout << " |  __ \\         | |                                ";
 		pm::tools::consoleCoordinates(x, y+2);
 		cout << " | |__) | __ ___ | |_ ___  __ _ _ __ ___   ___ _ __ ";
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 5);
 		pm::tools::consoleCoordinates(x, y+3);
 		cout << " |  ___/ '__/ _ \\| __/ _ \\/ _` | '_ ` _ \\ / _ \\ '__|";
 		pm::tools::consoleCoordinates(x, y+4);
@@ -62,8 +65,9 @@ namespace pm::consoleApp
 		cout << " |_|   |_|  \\___/ \\__\\___|\\__,_|_| |_| |_|\\___|_|";
 	}
 
-	void button(int x, int y)
+	void button(int x, int y, int colour)
 	{
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colour);
 		pm::tools::consoleCoordinates(x, y);
 		cout << "  ___________________";
 		pm::tools::consoleCoordinates(x, y+1);
@@ -74,16 +78,19 @@ namespace pm::consoleApp
 		cout << " \\___________________/";
 	}
 
-	void textInButton(int x, int y, string text)
+	void textInButton(int x, int y, string text, int colour)
 	{
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colour);
 		pm::tools::consoleCoordinates(x, y);
 		cout << text;
 	}
 	void border(int x, int y, int n)
 	{
+		
 		for (int i = 0; i < n; i++)
 		{
 			pm::tools::consoleCoordinates(x, y);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 3);
 			cout << "(*)";
 			y++;
 		}
@@ -91,54 +98,56 @@ namespace pm::consoleApp
 
 	void teamFigure(int x, int y)
 	{
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 9);
 		pm::tools::consoleCoordinates(x, y);
-		cout << "                @@@@    @@@@@@@    @@@@";
+		cout << "      @@@@    @@@@@@@    @@@@";
 		pm::tools::consoleCoordinates(x, y+1);
-		cout << "               @@@@@@  @@@@@@@@@  @@@@@@";
+		cout << "     @@@@@@  @@@@@@@@@  @@@@@@";
 		pm::tools::consoleCoordinates(x, y+2);
-		cout << "               @@@@@@#  @@@@@@@  @@@@@@@";
+		cout << "     @@@@@@#  @@@@@@@  @@@@@@@";
 		pm::tools::consoleCoordinates(x, y+3);
-		cout << "                 %@                 @#";
+		cout << "       %@        @#       @#";
 		pm::tools::consoleCoordinates(x, y+4);
-		cout << "             @@@@@@@@ @@@@@@@@@@@ @@@@@@@@";
+		cout << "   @@@@@@@@ @@@@@@@@@@@ @@@@@@@@";
 		pm::tools::consoleCoordinates(x, y+5);
-		cout << "             @@@@@@@.@@@@@@@@@@@@@ @@@@@@@";
+		cout << "   @@@@@@@.@@@@@@@@@@@@@ @@@@@@@";
 		pm::tools::consoleCoordinates(x, y+6);
-		cout << "            @@ @@@@@@@@@@@@@@@@@@@@@@@@@ @@";
+		cout << "  @@ @@@@@@@@@@@@@@@@@@@@@@@@@ @@";
 		pm::tools::consoleCoordinates(x, y+7);
-		cout << "           @@  @@@@ @@ @@@@@@@@@ @@ @@@@  @@";
+		cout << " @@  @@@@ @@ @@@@@@@@@ @@ @@@@  @@";
 		pm::tools::consoleCoordinates(x, y+8);
-		cout << "           @@  @&@ @@  @@@@@@@@@  @@ @@@  @@";
+		cout << " @@  @&@ @@  @@@@@@@@@  @@ @@@  @@";
 		pm::tools::consoleCoordinates(x, y+9);
-		cout << "          @@   @@@@@@@ @@@@@@@@@ @@@@@@@   @@";
+		cout << "@@   @@@@@@@ @@@@@@@@@ @@@@@@@   @@";
 		pm::tools::consoleCoordinates(x, y+10);
-		cout << "               @@   @@ @@@@@@@@@ @@   @@";
+		cout << "     @@   @@ @@@@@@@@@ @@   @@";
 		pm::tools::consoleCoordinates(x, y+11);
-		cout << "               @@  @@@ @@@@ @@@@ @@@  @@";
+		cout << "     @@  @@@ @@@@ @@@@ @@@  @@";
 		pm::tools::consoleCoordinates(x, y+12);
-		cout << "               @@  @@@ @@@@ @@@@ @@@  @@";
+		cout << "     @@  @@@ @@@@ @@@@ @@@  @@";
 		pm::tools::consoleCoordinates(x, y+13);
-		cout << "               @@  @@@ @@@@ @@@@ @@@  @@";
+		cout << "     @@  @@@ @@@@ @@@@ @@@  @@";
 		pm::tools::consoleCoordinates(x, y+14);
-		cout << "               @@  @@@ @@@@ @@@@ @@@  @@";
+		cout << "     @@  @@@ @@@@ @@@@ @@@  @@";
 		pm::tools::consoleCoordinates(x, y+15);
-		cout << "               @&   @  @@@@ @@@@  @   @&";
+		cout << "     @&   @  @@@@ @@@@  @   @&";
 		pm::tools::consoleCoordinates(x, y+16);
-		cout << "                       @@@@ @@@@";
+		cout << "             @@@@ @@@@";
 	}
 	void mainMenu()
 	{
-		teamFigure(0, 33);
-		border(4, 0, 51);
+		
+		border(0, 0, 51);
+		teamFigure(10, 33);
 		label(30, 1);
-		button(43, 11);
-		button(43, 16);
-		button(43, 21);
-		button(43, 26);
-		textInButton(51, 13, "Log in");
-		textInButton(48, 18, "Registration");
-		textInButton(47, 23, "Change password");
-		textInButton(52, 28, "Exit");
+		button(43, 11, 7);
+		button(43, 16, 7);
+		button(43, 21, 7);
+		button(43, 26, 7);
+		textInButton(51, 13, "Log in", 7);
+		textInButton(48, 18, "Registration", 7);
+		textInButton(47, 23, "Change password", 7);
+		textInButton(52, 28, "Exit", 7);
 		computerFigure(68, 30);
 		border(107, 0, 51);
 	}
