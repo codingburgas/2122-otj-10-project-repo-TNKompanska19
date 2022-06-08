@@ -134,23 +134,192 @@ namespace pm::consoleApp
 		pm::tools::consoleCoordinates(x, y+16);
 		cout << "             @@@@ @@@@";
 	}
-	void mainMenu()
+
+	bool mainMenu()
 	{
-		
+		int counter = 1;
+
 		border(0, 0, 51);
 		teamFigure(10, 33);
 		label(30, 1);
-		button(43, 11, 7);
+		button(43, 11, 8);
 		button(43, 16, 7);
 		button(43, 21, 7);
 		button(43, 26, 7);
-		textInButton(51, 13, "Log in", 7);
+		textInButton(51, 13, "Log in", 8);
 		textInButton(48, 18, "Registration", 7);
 		textInButton(47, 23, "Change password", 7);
 		textInButton(52, 28, "Exit", 7);
 		computerFigure(68, 30);
 		border(107, 0, 51);
-	}
+
+		do
+		{
+			switch (_getch())
+			{
+
+			case KEY_UP:
+			{
+				switch (counter)
+				{
+				case 1:
+				{
+					system("CLS");
+					border(0, 0, 51);
+					teamFigure(10, 33);
+					label(30, 1);
+					button(43, 11, 8);
+					button(43, 16, 7);
+					button(43, 21, 7);
+					button(43, 26, 7);
+					textInButton(51, 13, "Log in", 8);
+					textInButton(48, 18, "Registration", 7);
+					textInButton(47, 23, "Change password", 7);
+					textInButton(52, 28, "Exit", 7);
+					computerFigure(68, 30);
+					border(107, 0, 51);
+					counter = 4;
+				}break;
+				case 2:
+				{
+					system("CLS");
+					border(0, 0, 51);
+					teamFigure(10, 33);
+					label(30, 1);
+					button(43, 11, 7);
+					button(43, 16, 8);
+					button(43, 21, 7);
+					button(43, 26, 7);
+					textInButton(51, 13, "Log in", 7);
+					textInButton(48, 18, "Registration", 8);
+					textInButton(47, 23, "Change password", 7);
+					textInButton(52, 28, "Exit", 7);
+					computerFigure(68, 30);
+					border(107, 0, 51);
+					counter = 1;
+				}break;
+				case 3:
+				{
+					system("CLS");
+					border(0, 0, 51);
+					teamFigure(10, 33);
+					label(30, 1);
+					button(43, 11, 7);
+					button(43, 16, 7);
+					button(43, 21, 8);
+					button(43, 26, 7);
+					textInButton(51, 13, "Log in", 7);
+					textInButton(48, 18, "Registration", 7);
+					textInButton(47, 23, "Change password", 8);
+					textInButton(52, 28, "Exit", 7);
+					computerFigure(68, 30);
+					border(107, 0, 51);
+					counter = 2;
+				}break;
+				case 4:
+				{
+					system("CLS");
+					border(0, 0, 51);
+					teamFigure(10, 33);
+					label(30, 1);
+					button(43, 11, 7);
+					button(43, 16, 7);
+					button(43, 21, 7);
+					button(43, 26, 8);
+					textInButton(51, 13, "Log in", 7);
+					textInButton(48, 18, "Registration", 7);
+					textInButton(47, 23, "Change password", 7);
+					textInButton(52, 28, "Exit", 8);
+					computerFigure(68, 30);
+					border(107, 0, 51);
+					counter = 3;
+				}break;
+				}
+			} break;
+
+			case KEY_DOWN:
+			{
+				switch (counter)
+				{
+				case 1:
+				{
+					system("CLS");
+					border(0, 0, 51);
+					teamFigure(10, 33);
+					label(30, 1);
+					button(43, 11, 8);
+					button(43, 16, 7);
+					button(43, 21, 7);
+					button(43, 26, 7);
+					textInButton(51, 13, "Log in", 8);
+					textInButton(48, 18, "Registration", 7);
+					textInButton(47, 23, "Change password", 7);
+					textInButton(52, 28, "Exit", 7);
+					computerFigure(68, 30);
+					border(107, 0, 51);
+					counter = 2;
+				}break;
+				case 2:
+				{
+					system("CLS");
+					border(0, 0, 51);
+					teamFigure(10, 33);
+					label(30, 1);
+					button(43, 11, 7);
+					button(43, 16, 8);
+					button(43, 21, 7);
+					button(43, 26, 7);
+					textInButton(51, 13, "Log in", 7);
+					textInButton(48, 18, "Registration", 8);
+					textInButton(47, 23, "Change password", 7);
+					textInButton(52, 28, "Exit", 7);
+					computerFigure(68, 30);
+					border(107, 0, 51);
+					counter = 3;
+				}break;
+				case 3:
+				{
+					system("CLS");
+					border(0, 0, 51);
+					teamFigure(10, 33);
+					label(30, 1);
+					button(43, 11, 7);
+					button(43, 16, 7);
+					button(43, 21, 8);
+					button(43, 26, 7);
+					textInButton(51, 13, "Log in", 7);
+					textInButton(48, 18, "Registration", 7);
+					textInButton(47, 23, "Change password", 8);
+					textInButton(52, 28, "Exit", 7);
+					computerFigure(68, 30);
+					border(107, 0, 51);
+					counter = 4;
+				}break;
+				case 4:
+				{
+					system("CLS");
+					border(0, 0, 51);
+					teamFigure(10, 33);
+					label(30, 1);
+					button(43, 11, 7);
+					button(43, 16, 7);
+					button(43, 21, 7);
+					button(43, 26, 8);
+					textInButton(51, 13, "Log in", 7);
+					textInButton(48, 18, "Registration", 7);
+					textInButton(47, 23, "Change password", 7);
+					textInButton(52, 28, "Exit", 8);
+					computerFigure(68, 30);
+					border(107, 0, 51);
+					counter = 1;
+				}break;
+				}
+			}break;
+			}
+			}while (true);
+			return 1;
+		}
 }
+
 
 

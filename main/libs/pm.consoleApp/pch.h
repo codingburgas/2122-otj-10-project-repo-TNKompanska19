@@ -11,5 +11,12 @@
 #include <iostream>
 #include <string>
 #include <windows.h>
+#include <conio.h>
+
+#define KEY_UP 72
+#define KEY_DOWN 80
+#define ENTER 13
+#define ESCAPE 27
+#define CTRL_KEYPRESS(k) ((k)  & 0x1f) 
 using namespace std;
 #endif //PCH_H
