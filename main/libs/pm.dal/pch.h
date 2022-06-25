@@ -13,5 +13,7 @@
 #include <exception>
 
 #include "..\nanodbc\nanodbc.h"
+using namespace std;
+
 
 #endif //PCH_H

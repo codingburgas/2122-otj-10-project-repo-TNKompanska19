@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "..\libs\pm.dal\UserStore.h"
 #include "..\libs\pm.consoleApp\mainMenu.h"
 using namespace std;
@@ -10,19 +11,26 @@ int main()
     cout << "\n Enter last name: \n";
     string lastName;
     cin >> lastName;
-    cout << "\n Enter age: \n";
-    int age;
-    cin >> age;
     cout << "\n Enter email: \n";
-    string email;
-    cin >> email;
+    string username;
+    cin >> username;
     cout << "\n Enter pass: \n";
     string pass;
-    cin >> pass;
+    cin >> pass;*/
 
-    pm::dal::insertDB(firstName, lastName, age, email, pass);*/
+    cout << "Enter title\n";
+    string title;
+    cin >> title;
+    cout << "Enter desc\n";
+    string desc;
+    cin >> desc;
+    cout << "Enter pr name\n";
+    string pr;
+    cin >> pr;
+    cout << "Enter username\n";
+    string user;
+    cin >> user;
 
-
-    pm::consoleApp::mainMenu();
+    pm::dal::insertTeams(title);
 }
 

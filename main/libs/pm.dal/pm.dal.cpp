@@ -7,11 +7,6 @@
 using namespace std;
 namespace pm::dal
 {
-
-    void print()
-    {
-        cout << "mbruh";
-    }
     void sth() try
     {
         auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
@@ -33,18 +28,17 @@ namespace pm::dal
     }
 
 
-    void insertDB(string firstName, string lastName, int age, string email, string pass) try
+    void insertUsersDB(string username, string firstName, string lastName, string pass) try
     {
         nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
         nanodbc::statement statement(connection);
 
-        prepare(statement,"INSERT INTO Users([First Name], [Last Name], Age, Email, [Password]) VALUES (?,?,?,?,?)");
+        prepare(statement, "INSERT INTO Users(Username, FirstName, LastName, [Password]) VALUES (?,?,?,?)");
 
-        statement.bind(0, firstName.c_str());
-        statement.bind(1, lastName.c_str());
-        statement.bind(2, &age);
-        statement.bind(3, email.c_str());
-        statement.bind(4, pass.c_str());
+        statement.bind(0, username.c_str());
+        statement.bind(1, firstName.c_str());
+        statement.bind(2, lastName.c_str());
+        statement.bind(3, pass.c_str());
 
         execute(statement);
         // execute(statement);
@@ -55,4 +49,92 @@ namespace pm::dal
         std::cerr << e.what() << std::endl;
     }
 
+    void insertProjectsDB(string title, string description) try
+    {
+        nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
+        nanodbc::statement statement(connection);
+
+        prepare(statement, "INSERT INTO Projects(Title, [Description]) VALUES (?,?)");
+
+        statement.bind(0, title.c_str());
+        statement.bind(1, description.c_str());
+
+        execute(statement);
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    void insertTasks(string title, string description, string projectName, string username)try
+    {
+        nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
+        nanodbc::statement statement(connection);
+
+        prepare(statement, "INSERT INTO Tasks(Title, [Description]) VALUES (?,?) DECLARE @ProjectID INT SELECT @ProjectID = Id FROM Projects WHERE Title = '" + projectName + "' UPDATE Tasks SET ProjectID = @ProjectID WHERE Title = '" + title + "' DECLARE @UserID INT SELECT @UserID = Id FROM Users WHERE Username = '" + username + "' UPDATE Tasks SET AsigneeID = @UserID WHERE Title = '" + title + "'");
+        statement.bind(0, title.c_str());
+        statement.bind(1, description.c_str());
+
+        execute(statement);
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    void insertTeams(string title) try
+    {
+        nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
+        nanodbc::statement statement(connection);
+
+        prepare(statement, "INSERT INTO Teams(Title) VALUES (?) ");
+        statement.bind(0, title.c_str());
+
+        execute(statement);
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+
+    void insertUsersInTeam(int users, string teamName)try
+    {
+        nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
+        nanodbc::statement statement(connection);
+
+        string username;
+        for (int i = 1; i <= users; i++)
+        {
+            cout << "Enter username:";
+            cin >> username;
+
+            prepare(statement, "DECLARE @TeamID INT SELECT @TeamID = Id FROM Teams WHERE Title = '" + teamName + "' UPDATE Users SET TeamID = @TeamID WHERE Username = '" + username + "'");
+            execute(statement);
+        }
+
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    void insertUsersInProject(string username, string projectName) try
+    {
+        nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
+        nanodbc::statement statement(connection);
+        string result = "DECLARE @ProjectID INT SELECT @ProjectID = Id FROM Projects WHERE Title = '" + projectName + "' UPDATE Users SET ProjectID = @ProjectID WHERE Username = '" + username + "'";
+        prepare(statement, result);
+        //statement.bind(0, username.c_str());
+        //statement.bind(1, projectName.c_str());
+
+        execute(statement);
+
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
 }
+
+
