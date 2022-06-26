@@ -153,6 +153,27 @@ namespace pm::dal
     {
         std::cerr << e.what() << std::endl;
     }
+
+    void checkUser(string username, string password) try
+    {
+        auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
+        nanodbc::connection conn(connstr);
+
+        string query = NANODBC_TEXT("SELECT COUNT(1) FROM Users WHERE [Password] LIKE '" + password + "' AND Username LIKE '" + username + "'");
+        auto result = nanodbc::execute(conn, query);
+        int flag;
+        for (long i = 1; result.next(); ++i)
+        {
+            auto count = result.get<int>(0);
+            flag = count;
+        }
+            if (flag == 1)cout << "Login successful!";
+            else cout << "Wrong username or password";  
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
 }
 
 
