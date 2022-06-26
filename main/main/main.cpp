@@ -18,7 +18,7 @@ int main()
     string pass;
     cin >> pass;*/
 
-    cout << "Enter title\n";
+    /*cout << "Enter title\n";
     string title;
     cin >> title;
     cout << "Enter desc\n";
@@ -29,8 +29,17 @@ int main()
     cin >> pr;
     cout << "Enter username\n";
     string user;
-    cin >> user;
+    cin >> user;*/
 
-    pm::dal::insertTeams(title);
+    cout << "Enter username: \n";
+    string username;
+    cin >> username;
+    cout << "Enter password: \n";
+    string password;
+    cin >> password;
+
+    cout << pm::dal::getIdByUsername(username);
+
+    
 }
 

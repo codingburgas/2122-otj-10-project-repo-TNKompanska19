@@ -9,4 +9,5 @@ namespace pm::dal
 	void insertTeams(string title);
 	void insertUsersInTeam(int users, string teamName);
 	void insertUsersInProject(string username, string projectName);
+	int getIdByUsername(string username);
 }

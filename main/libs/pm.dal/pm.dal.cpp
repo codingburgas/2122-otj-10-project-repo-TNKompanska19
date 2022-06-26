@@ -135,6 +135,24 @@ namespace pm::dal
     {
         std::cerr << e.what() << std::endl;
     }
+
+    int getIdByUsername(string username) try
+    {
+        auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
+        nanodbc::connection conn(connstr);
+
+        string query = NANODBC_TEXT("SELECT Id FROM Users WHERE Username = '" + username + "'");
+        auto result = nanodbc::execute(conn, query);
+        for (long i = 1; result.next(); ++i)
+        {
+            auto id = result.get<int>(0);
+            return id;
+        }
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
 }
 
 
