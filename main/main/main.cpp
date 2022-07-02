@@ -38,7 +38,7 @@ int main()
     string password;
     cin >> password;
 
-    pm::dal::checkUser(username, password);
+    cout << pm::dal::checkAdmin(username);
 
     
 }

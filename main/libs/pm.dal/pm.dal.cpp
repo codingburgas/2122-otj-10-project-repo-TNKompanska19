@@ -174,6 +174,29 @@ namespace pm::dal
     {
         std::cerr << e.what() << std::endl;
     }
+
+    bool checkAdmin(string username) try
+    {
+        int id = getIdByUsername(username);
+
+        auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
+        nanodbc::connection conn(connstr);
+        string query = NANODBC_TEXT("SELECT RoleID FROM Users WHERE Username = '" + username + "'");
+        auto result = nanodbc::execute(conn, query);
+        for (long i = 1; result.next(); ++i)
+        {
+            auto admin = result.get<int>(0);
+            if (admin == 2)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
 }
 
 

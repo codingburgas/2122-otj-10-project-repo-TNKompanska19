@@ -11,4 +11,5 @@ namespace pm::dal
 	void insertUsersInProject(string username, string projectName);
 	int getIdByUsername(string username);
 	void checkUser(string username, string password);
+	bool checkAdmin(string username);
 }
