@@ -12,9 +12,11 @@
 #include <string>
 #include <exception>
 #include <windows.h>
+#include <fstream>
 
 #include "..\nanodbc\nanodbc.h"
 #include "..\pm.consoleApp\mainMenu.h"
+#include "..\pm.tools\extraFunctions.h"
 using namespace std;
 
 

@@ -39,7 +39,7 @@ int main()
     cin >> password;*/
 
     cout << pm::consoleApp::mainMenu();
-
+    //cout << pm::dal::getIdByUsername("teodora");
     
 }
 

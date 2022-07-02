@@ -12,4 +12,5 @@ namespace pm::dal
 	int getIdByUsername(std::string username);
 	void checkUser(std::string username, std::string password);
 	bool checkAdmin(std::string username);
+	void userProjects(std::string username);
 }

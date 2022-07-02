@@ -7,25 +7,7 @@
 using namespace std;
 namespace pm::dal
 {
-    void sth() try
-    {
-        auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
-        nanodbc::connection conn(connstr);
-
-        string query = NANODBC_TEXT("SELECT TOP 10 * FROM Users");
-        auto result = nanodbc::execute(conn, query);
-        while (result.next())
-        {
-            auto id = result.get<int>(0);
-            auto firstName = result.get<std::string>(1);
-
-            std::cout << id << " , " << firstName << "\n";
-        }
-    }
-    catch (std::exception& e)
-    {
-        std::cerr << e.what() << std::endl;
-    }
+    
 
 
     void insertUsersDB(string username, string firstName, string lastName, string pass) try
@@ -136,14 +118,14 @@ namespace pm::dal
         std::cerr << e.what() << std::endl;
     }
 
-    int getIdByUsername(string username) try
+    auto getIdByUsername(string username) try
     {
         auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
         nanodbc::connection conn(connstr);
 
         string query = NANODBC_TEXT("SELECT Id FROM Users WHERE Username = '" + username + "'");
         auto result = nanodbc::execute(conn, query);
-        for (long i = 1; result.next(); ++i)
+        for (auto i = 1; result.next(); ++i)
         {
             auto id = result.get<int>(0);
             return id;
@@ -157,7 +139,6 @@ namespace pm::dal
     
     bool checkAdmin(string username) try
     {
-        int id = getIdByUsername(username);
 
         auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
         nanodbc::connection conn(connstr);
@@ -172,6 +153,26 @@ namespace pm::dal
             }
         }
         return false;
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    void userProjects(string username) try
+    {
+        auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
+        nanodbc::connection conn(connstr);
+        int y = 20;
+        string query = NANODBC_TEXT("SELECT Title FROM Projects WHERE UserID = " + to_string(getIdByUsername(username)));
+        auto result = nanodbc::execute(conn, query);
+        for (long i = 1; result.next(); ++i)
+        {
+            auto title = result.get<std::string>(0);
+            pm::tools::consoleCoordinates(45, y);
+            y += 2;
+            std::cout << title << "\n";
+        }
     }
     catch (std::exception& e)
     {
@@ -199,7 +200,11 @@ namespace pm::dal
             }
             else
             {
-                cout << "User panel";
+                system("CLS");
+                pm::consoleApp::border(0, 0, 51);
+                pm::consoleApp::label(30, 1);
+                pm::consoleApp::border(107, 0, 51);
+                userProjects(username);
             }
         }
         else
