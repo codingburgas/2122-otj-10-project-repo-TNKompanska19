@@ -31,14 +31,14 @@ int main()
     string user;
     cin >> user;*/
 
-    cout << "Enter username: \n";
+   /* cout << "Enter username: \n";
     string username;
     cin >> username;
     cout << "Enter password: \n";
     string password;
-    cin >> password;
+    cin >> password;*/
 
-    cout << pm::dal::checkAdmin(username);
+    cout << pm::consoleApp::mainMenu();
 
     
 }

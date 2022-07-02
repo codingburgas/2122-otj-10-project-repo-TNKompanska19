@@ -3,13 +3,13 @@
 namespace pm::dal
 {
 	void sth();
-	void insertUsersDB(string username, string firstName, string lastName, string pass);
-	void insertProjectsDB(string title, string description);
-	void insertTasks(string title, string description, string projectName, string username);
-	void insertTeams(string title);
-	void insertUsersInTeam(int users, string teamName);
-	void insertUsersInProject(string username, string projectName);
-	int getIdByUsername(string username);
-	void checkUser(string username, string password);
-	bool checkAdmin(string username);
+	void insertUsersDB(std::string username, std::string firstName, std::string lastName, std::string pass);
+	void insertProjectsDB(std::string title, std::string description);
+	void insertTasks(std::string title, std::string description, std::string projectName, std::string username);
+	void insertTeams(std::string title);
+	void insertUsersInTeam(int users, std::string teamName);
+	void insertUsersInProject(std::string username, std::string projectName);
+	int getIdByUsername(std::string username);
+	void checkUser(std::string username, std::string password);
+	bool checkAdmin(std::string username);
 }

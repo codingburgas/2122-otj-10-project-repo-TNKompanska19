@@ -13,9 +13,13 @@
 #include <windows.h>
 #include <conio.h>
 
+
+#include "..\pm.tools\extraFunctions.h"
+#include "..\pm.dal\UserStore.h"
+
 #define KEY_UP 72
 #define KEY_DOWN 80
-#define ENTER 13
+#define KEY_ENTER 13
 #define ESCAPE 27
 #define CTRL_KEYPRESS(k) ((k)  & 0x1f) 
 using namespace std;

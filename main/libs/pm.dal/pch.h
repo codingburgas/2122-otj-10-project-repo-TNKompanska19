@@ -11,8 +11,10 @@
 #include <iostream>
 #include <string>
 #include <exception>
+#include <windows.h>
 
 #include "..\nanodbc\nanodbc.h"
+#include "..\pm.consoleApp\mainMenu.h"
 using namespace std;
 
 

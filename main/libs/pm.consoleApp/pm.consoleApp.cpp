@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "mainMenu.h"
 
-#include "..\pm.tools\extraFunctions.h"
+
 namespace pm::consoleApp
 {
 	void computerFigure(int x, int y)
@@ -135,6 +135,49 @@ namespace pm::consoleApp
 		cout << "             @@@@ @@@@";
 	}
 
+	void registration()
+	{
+		pm::tools::consoleCoordinates(45, 15);
+		cout << "ENTER FIRST NAME:";
+		pm::tools::consoleCoordinates(45, 16);
+		string firstName;
+		cin >> firstName;
+		pm::tools::consoleCoordinates(45, 18);
+		cout << "ENTER LAST NAME: ";
+		pm::tools::consoleCoordinates(45, 19);
+		string lastName;
+		cin >> lastName;
+		pm::tools::consoleCoordinates(45, 21);
+		cout << "ENTER USERNAME: ";
+		pm::tools::consoleCoordinates(45, 22);
+		string username;
+		cin >> username;
+		pm::tools::consoleCoordinates(45, 24);
+		cout << "ENTER PASSWORD: ";
+		pm::tools::consoleCoordinates(45, 25);
+		string pass;
+		cin >> pass;
+
+		pm::dal::insertUsersDB(username, firstName, lastName, pass);
+		system("CLS");
+		pm::consoleApp::mainMenu();
+	}
+
+	void login()
+	{
+		pm::tools::consoleCoordinates(45, 21);
+		cout << "ENTER USERNAME: ";
+		pm::tools::consoleCoordinates(45, 22);
+		string username;
+		cin >> username;
+		pm::tools::consoleCoordinates(45, 24);
+		cout << "ENTER PASSWORD: ";
+		pm::tools::consoleCoordinates(45, 25);
+		string pass;
+		cin >> pass;
+
+		pm::dal::checkUser(username, pass);
+	}
 	bool mainMenu()
 	{
 		int counter = 1;
@@ -315,10 +358,41 @@ namespace pm::consoleApp
 				}break;
 				}
 			}break;
+			case KEY_ENTER:
+			{
+				switch (counter)
+				{
+				case 1:
+				{
+					system("CLS");
+					border(0, 0, 51);
+					label(30, 1);
+					border(107, 0, 51);
+					login();
+				}break;
+				case 2:
+				{
+					system("CLS");
+					border(0, 0, 51);
+					label(30, 1);
+					border(107, 0, 51);
+					login();
+				}break;
+				case 3:
+				{
+					system("CLS");
+					border(0, 0, 51);
+					label(30, 1);
+					border(107, 0, 51);
+					registration();
+					
+				}break;
+				}
 			}
-			}while (true);
-			return 1;
-		}
+			}
+		} while (true);
+		return 1;
+	}
 }
 
 
