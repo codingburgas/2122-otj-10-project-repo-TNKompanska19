@@ -8,7 +8,23 @@ using namespace std;
 namespace pm::dal
 {
     
+    auto getIdByUsername(string username) try
+    {
+        auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
+        nanodbc::connection conn(connstr);
 
+        string query = NANODBC_TEXT("SELECT Id FROM Users WHERE Username = '" + username + "'");
+        auto result = nanodbc::execute(conn, query);
+        for (auto i = 1; result.next(); ++i)
+        {
+            auto id = result.get<int>(0);
+            return id;
+        }
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
 
     void insertUsersDB(string username, string firstName, string lastName, string pass) try
     {
@@ -31,12 +47,12 @@ namespace pm::dal
         std::cerr << e.what() << std::endl;
     }
 
-    void insertProjectsDB(string title, string description) try
+    void insertProjectsDB(string title, string description, string username) try
     {
         nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
         nanodbc::statement statement(connection);
 
-        prepare(statement, "INSERT INTO Projects(Title, [Description]) VALUES (?,?)");
+        prepare(statement, "INSERT INTO Projects(Title, [Description], CreatorID) VALUES (?,?," + to_string(getIdByUsername(username)) + ")");
 
         statement.bind(0, title.c_str());
         statement.bind(1, description.c_str());
@@ -118,24 +134,6 @@ namespace pm::dal
         std::cerr << e.what() << std::endl;
     }
 
-    auto getIdByUsername(string username) try
-    {
-        auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
-        nanodbc::connection conn(connstr);
-
-        string query = NANODBC_TEXT("SELECT Id FROM Users WHERE Username = '" + username + "'");
-        auto result = nanodbc::execute(conn, query);
-        for (auto i = 1; result.next(); ++i)
-        {
-            auto id = result.get<int>(0);
-            return id;
-        }
-    }
-    catch (std::exception& e)
-    {
-        std::cerr << e.what() << std::endl;
-    }
-
     
     bool checkAdmin(string username) try
     {
@@ -204,7 +202,7 @@ namespace pm::dal
                 pm::consoleApp::border(0, 0, 51);
                 pm::consoleApp::label(30, 1);
                 pm::consoleApp::border(107, 0, 51);
-                userProjects(username);
+                pm::consoleApp::userOptions(username);
             }
         }
         else
@@ -220,6 +218,15 @@ namespace pm::dal
         std::cerr << e.what() << std::endl;
     }
 
+    void createProject(string projectName)
+    {
+        nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
+        nanodbc::statement statement(connection);
+        string result = "";
+        prepare(statement, result);
+
+        execute(statement);
+    }
 }
 
 

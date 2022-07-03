@@ -156,6 +156,7 @@
     <ClInclude Include="mainMenu.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="registrationForm.h" />
+    <ClInclude Include="userView.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

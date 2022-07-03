@@ -24,6 +24,9 @@
     <ClInclude Include="registrationForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="userView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pm.consoleApp.cpp">

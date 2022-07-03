@@ -178,6 +178,55 @@ namespace pm::consoleApp
 
 		pm::dal::checkUser(username, pass);
 	}
+
+	void userOptions(string username)
+	{
+		pm::tools::consoleCoordinates(45, 21);
+		cout << "1 - MY PROJECTS ";
+		pm::tools::consoleCoordinates(45, 23);
+		cout << "2 - PROJECTS I'M IN ";
+		pm::tools::consoleCoordinates(45, 25);
+		cout << "3 - CREATE PROJECT ";
+		pm::tools::consoleCoordinates(45, 28);
+		cout << "Enter your choice: ";
+		int choice;
+		cin >> choice;
+		switch (choice)
+		{
+		case 1:
+		{
+
+		}break;
+		case 2:
+		{
+			system("CLS");
+			border(0, 0, 51);
+			label(30, 1);
+			border(107, 0, 51);
+			pm::dal::userProjects(username);
+		}break;
+		case 3:
+		{
+			system("CLS");
+			border(0, 0, 51);
+			label(30, 1);
+			border(107, 0, 51);
+			pm::tools::consoleCoordinates(45, 15);
+			cout << "ENTER PROJECT NAME:";
+			pm::tools::consoleCoordinates(45, 16);
+			string name;
+			cin.ignore();
+			getline(cin, name);
+			pm::tools::consoleCoordinates(45, 18);
+			cout << "ENTER PROJECT DESCRIPTION:";
+			pm::tools::consoleCoordinates(45, 19);
+			string description;
+			getline(cin, description);
+			pm::dal::insertProjectsDB(name, description, username);
+		}
+		}
+		
+	}
 	bool mainMenu()
 	{
 		int counter = 1;
