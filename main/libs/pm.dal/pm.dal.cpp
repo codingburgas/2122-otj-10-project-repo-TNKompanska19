@@ -260,6 +260,15 @@ namespace pm::dal
         prepare(statement, result);
         execute(statement);
     }
+
+    void deleteProjects(string title, string username)
+    {
+        nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
+        nanodbc::statement statement(connection);
+        string result = "DELETE FROM Projects WHERE Title = '" + title + "' AND CreatorID = " + to_string(getIdByUsername(username));
+        prepare(statement, result);
+        execute(statement);
+    }
 }
 
 

@@ -4,6 +4,9 @@
 
 namespace pm::consoleApp
 {
+	void createdProjectsOptions(string username);
+	void userOptions(string username);
+
 	void computerFigure(int x, int y)
 	{
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 9);
@@ -179,42 +182,7 @@ namespace pm::consoleApp
 		pm::dal::checkUser(username, pass);
 	}
 
-	void createdProjectsOptions(string username)
-	{
-		pm::tools::consoleCoordinates(40, 35);
-		cout << "PRESS CTRL + E TO EDIT PROJECTS";
-		pm::tools::consoleCoordinates(40, 37);
-		cout << "PRESS CTRL + D TO DELETE PROJECTS";
-
-		switch (_getch())
-		{
-		case CTRL_KEYPRESS('e'):
-		{
-			system("CLS");
-			border(0, 0, 51);
-			label(30, 1);
-			border(107, 0, 51);
-			pm::tools::consoleCoordinates(40, 21);
-			cout << "Enter the name of the project you want to edit:";
-			pm::tools::consoleCoordinates(40, 22);
-			string name;
-			cin.ignore();
-			getline(cin, name);
-			pm::tools::consoleCoordinates(40, 24);
-			cout << "Enter new title of the project:";
-			pm::tools::consoleCoordinates(40, 25);
-			string newTitle;
-			getline(cin, newTitle);
-			pm::tools::consoleCoordinates(40, 26);
-			cout << "Enter new description of the project:";
-			pm::tools::consoleCoordinates(40, 27);
-			string description;
-			getline(cin, description);
-			pm::dal::updateProjects(name, newTitle, description, username);
-		}
-
-		}
-	}
+	
 	void userOptions(string username)
 	{
 		pm::tools::consoleCoordinates(45, 21);
@@ -237,6 +205,17 @@ namespace pm::consoleApp
 			border(107, 0, 51);
 			pm::dal::showUserCreatedProjects(username);
 			createdProjectsOptions(username);
+			switch (_getch())
+			{
+			case ESCAPE:
+			{
+				system("CLS");
+				border(0, 0, 51);
+				label(30, 1);
+				border(107, 0, 51);
+				userOptions(username);
+			}break;
+			}
 		}break;
 		case 2:
 		{
@@ -245,6 +224,17 @@ namespace pm::consoleApp
 			label(30, 1);
 			border(107, 0, 51);
 			pm::dal::showUserProjects(username);
+			switch (_getch())
+			{
+			case ESCAPE:
+			{
+				system("CLS");
+				border(0, 0, 51);
+				label(30, 1);
+				border(107, 0, 51);
+				userOptions(username);
+			}break;
+			}
 		}break;
 		case 3:
 		{
@@ -269,6 +259,15 @@ namespace pm::consoleApp
 			label(30, 1);
 			border(107, 0, 51);
 			userOptions(username);
+		}
+		}
+
+		switch (_getch())
+		{
+		case ESCAPE:
+		{
+			system("CLS");
+			pm::consoleApp::mainMenu();
 		}
 		}
 		
@@ -487,6 +486,68 @@ namespace pm::consoleApp
 			}
 		} while (true);
 		return 1;
+	}
+
+	void createdProjectsOptions(string username)
+	{
+		pm::tools::consoleCoordinates(40, 35);
+		cout << "PRESS CTRL + E TO EDIT PROJECTS";
+		pm::tools::consoleCoordinates(40, 37);
+		cout << "PRESS CTRL + D TO DELETE PROJECTS";
+
+		switch (_getch())
+		{
+		case CTRL_KEYPRESS('e'):
+		{
+			system("CLS");
+			border(0, 0, 51);
+			label(30, 1);
+			border(107, 0, 51);
+			pm::tools::consoleCoordinates(40, 21);
+			cout << "Enter the name of the project you want to edit:";
+			pm::tools::consoleCoordinates(40, 22);
+			string name;
+			cin.ignore();
+			getline(cin, name);
+			pm::tools::consoleCoordinates(40, 24);
+			cout << "Enter new title of the project:";
+			pm::tools::consoleCoordinates(40, 25);
+			string newTitle;
+			getline(cin, newTitle);
+			pm::tools::consoleCoordinates(40, 26);
+			cout << "Enter new description of the project:";
+			pm::tools::consoleCoordinates(40, 27);
+			string description;
+			getline(cin, description);
+			pm::dal::updateProjects(name, newTitle, description, username);
+			system("CLS");
+			border(0, 0, 51);
+			label(30, 1);
+			border(107, 0, 51);
+			userOptions(username);
+		}break;
+
+		case CTRL_KEYPRESS('d'):
+		{
+			system("CLS");
+			border(0, 0, 51);
+			label(30, 1);
+			border(107, 0, 51);
+			pm::tools::consoleCoordinates(40, 21);
+			cout << "Enter the name of the project you want to delete:";
+			pm::tools::consoleCoordinates(40, 22);
+			string name;
+			cin.ignore();
+			getline(cin, name);
+			pm::dal::deleteProjects(name, username);
+			system("CLS");
+			border(0, 0, 51);
+			label(30, 1);
+			border(107, 0, 51);
+			userOptions(username);
+		}
+
+		}
 	}
 }
 
