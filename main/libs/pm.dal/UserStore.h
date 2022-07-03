@@ -18,4 +18,5 @@ namespace pm::dal
 	void viewProject(std::string name);
 	void viewTasksInProject(std::string name);
 	void viewTeamsInProject(std::string name);
+	void showUserTeams(std::string username);
 }

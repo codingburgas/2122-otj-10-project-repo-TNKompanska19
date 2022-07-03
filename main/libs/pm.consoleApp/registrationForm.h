@@ -2,5 +2,10 @@
 
 namespace pm::consoleApp
 {
-	void registration();
+	namespace registrationForm
+	{
+		void registration();
+		void login();
+	}
+
 }

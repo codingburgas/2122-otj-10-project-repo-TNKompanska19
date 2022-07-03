@@ -3,6 +3,9 @@
 
 namespace pm::consoleApp
 {
-	void userOptions(std::string username);
-	void createdProjectsOptions(std::string username);
+	namespace userView
+	{
+		void userOptions(std::string username);
+		void createdProjectsOptions(std::string username);
+	}
 }

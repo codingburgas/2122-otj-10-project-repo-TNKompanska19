@@ -6,8 +6,7 @@
 
 using namespace std;
 namespace pm::dal
-{
-    
+{ 
     auto getIdByUsername(string username) try
     {
         auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
@@ -118,17 +117,17 @@ namespace pm::dal
     {
         nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
         nanodbc::statement statement(connection);
-
+        int y = 25;
         string username;
         for (int i = 1; i <= users; i++)
         {
+            pm::tools::consoleCoordinates(45, y);
             cout << "Enter username:";
             cin >> username;
-
+            y++;
             prepare(statement, "DECLARE @TeamID INT SELECT @TeamID = Id FROM Teams WHERE Title = '" + teamName + "' UPDATE Users SET TeamID = @TeamID WHERE Username = '" + username + "'");
             execute(statement);
         }
-
     }
     catch (std::exception& e)
     {
@@ -195,6 +194,26 @@ namespace pm::dal
         std::cerr << e.what() << std::endl;
     }
 
+    void showUserTeams(string username) try
+    {
+        auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
+        nanodbc::connection conn(connstr);
+        int y = 20;
+        string query = NANODBC_TEXT("SELECT Title FROM Teams WHERE UserID = " + to_string(getIdByUsername(username)));
+        auto result = nanodbc::execute(conn, query);
+        for (long i = 1; result.next(); ++i)
+        {
+            auto title = result.get<std::string>(0);
+            pm::tools::consoleCoordinates(45, y);
+            y += 2;
+            std::cout << title << "\n";
+        }
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
     void checkUser(string username, string password) try
     {
         auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
@@ -217,10 +236,10 @@ namespace pm::dal
             else
             {
                 system("CLS");
-                pm::consoleApp::border(0, 0, 51);
-                pm::consoleApp::label(30, 1);
-                pm::consoleApp::border(107, 0, 51);
-                pm::consoleApp::userOptions(username);
+                pm::consoleApp::mainMenu::border(0, 0, 51);
+                pm::consoleApp::mainMenu::label(30, 1);
+                pm::consoleApp::mainMenu::border(107, 0, 51);
+                pm::consoleApp::userView::userOptions(username);
             }
         }
         else
@@ -228,7 +247,7 @@ namespace pm::dal
             Sleep(200);
             cout << "Wrong username or password";
             system("CLS");
-            pm::consoleApp::mainMenu();
+            pm::consoleApp::mainMenu::mainMenu();
         }
     }
     catch (std::exception& e)
@@ -285,9 +304,9 @@ namespace pm::dal
             
         }
         system("CLS");
-        pm::consoleApp::border(0, 0, 51);
-        pm::consoleApp::label(30, 1);
-        pm::consoleApp::border(107, 0, 51);
+        pm::consoleApp::mainMenu::border(0, 0, 51);
+        pm::consoleApp::mainMenu::label(30, 1);
+        pm::consoleApp::mainMenu::border(107, 0, 51);
         pm::tools::consoleCoordinates(45, 20);
         cout << "Project title: " << title;
         pm::tools::consoleCoordinates(45, 21);
