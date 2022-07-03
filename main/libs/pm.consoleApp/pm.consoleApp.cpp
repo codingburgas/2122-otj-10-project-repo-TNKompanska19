@@ -254,6 +254,10 @@ namespace pm::consoleApp
 			string description;
 			getline(cin, description);
 			pm::dal::insertProjectsDB(name, description, username);
+			cout << "ENTER PROJECT TEAM:";	
+			string team;
+			getline(cin, team);
+			pm::dal::insertTeams(team, name);
 			system("CLS");
 			border(0, 0, 51);
 			label(30, 1);
@@ -496,6 +500,9 @@ namespace pm::consoleApp
 		cout << "PRESS CTRL + D TO DELETE PROJECTS";
 		pm::tools::consoleCoordinates(40, 39);
 		cout << "PRESS CTRL + V TO VIEW PROJECTS";
+		pm::tools::consoleCoordinates(40, 41);
+		cout << "PRESS CTRL + T TO ADD TASK IN PROJECT";
+
 
 		switch (_getch())
 		{
@@ -564,12 +571,48 @@ namespace pm::consoleApp
 			pm::dal::viewProject(name);
 			pm::dal::viewTasksInProject(name);
 			pm::dal::viewTeamsInProject(name);
-			/*system("CLS");
+			switch(_getch())
+			{
+			case ESCAPE:
+			{
+				system("CLS");
+				border(0, 0, 51);
+				label(30, 1);
+				border(107, 0, 51);
+				pm::dal::showUserCreatedProjects(username);
+				createdProjectsOptions(username);
+			}
+			}
+		}
+		case CTRL_KEYPRESS('t'):
+		{
+			system("CLS");
 			border(0, 0, 51);
 			label(30, 1);
 			border(107, 0, 51);
-			userOptions(username);*/
-		}
+			pm::tools::consoleCoordinates(40, 21);
+			cout << "Enter the name of the project you want to add task:";
+			pm::tools::consoleCoordinates(40, 22);
+			string name;
+			cin.ignore();
+			getline(cin, name);
+			pm::tools::consoleCoordinates(40, 24);
+			cout << "Enter the title of the task:";
+			pm::tools::consoleCoordinates(40, 25);
+			string task;
+			getline(cin, task);
+			pm::tools::consoleCoordinates(40, 26);
+			cout << "Enter the description of the task:";
+			pm::tools::consoleCoordinates(40, 27);
+			string description;
+			getline(cin, description);
+			pm::dal::insertTasks(task, description, name);
+			system("CLS");
+			border(0, 0, 51);
+			label(30, 1);
+			border(107, 0, 51);
+			userOptions(username);
+		}break;
 
 		}
 	}

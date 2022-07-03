@@ -4,8 +4,8 @@ namespace pm::dal
 {
 	void insertUsersDB(std::string username, std::string firstName, std::string lastName, std::string pass);
 	void insertProjectsDB(std::string title, std::string description, std::string username);
-	void insertTasks(std::string title, std::string description, std::string projectName, std::string username);
-	void insertTeams(std::string title);
+	void insertTasks(std::string title, std::string description, std::string projectName);
+	void insertTeams(std::string title, std::string projectName);
 	void insertUsersInTeam(int users, std::string teamName);
 	void insertUsersInProject(std::string username, std::string projectName);
 	int getIdByUsername(std::string username);

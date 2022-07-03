@@ -82,12 +82,12 @@ namespace pm::dal
         std::cerr << e.what() << std::endl;
     }
 
-    void insertTasks(string title, string description, string projectName, string username)try
+    void insertTasks(string title, string description, string projectName)try
     {
         nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
         nanodbc::statement statement(connection);
 
-        prepare(statement, "INSERT INTO Tasks(Title, [Description]) VALUES (?,?) DECLARE @ProjectID INT SELECT @ProjectID = Id FROM Projects WHERE Title = '" + projectName + "' UPDATE Tasks SET ProjectID = @ProjectID WHERE Title = '" + title + "' DECLARE @UserID INT SELECT @UserID = Id FROM Users WHERE Username = '" + username + "' UPDATE Tasks SET AsigneeID = @UserID WHERE Title = '" + title + "'");
+        prepare(statement, "INSERT INTO Tasks(Title, [Description], ProjectID) VALUES (?,?," + to_string(getIdByProjectName(projectName)) +  ")");
         statement.bind(0, title.c_str());
         statement.bind(1, description.c_str());
 
@@ -98,12 +98,12 @@ namespace pm::dal
         std::cerr << e.what() << std::endl;
     }
 
-    void insertTeams(string title) try
+    void insertTeams(string title, string projectName) try
     {
         nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
         nanodbc::statement statement(connection);
 
-        prepare(statement, "INSERT INTO Teams(Title) VALUES (?) ");
+        prepare(statement, "INSERT INTO Teams(Title, ProjectID) VALUES (?," + to_string(getIdByProjectName(projectName)) + ")");
         statement.bind(0, title.c_str());
 
         execute(statement);
