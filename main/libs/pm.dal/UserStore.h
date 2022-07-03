@@ -12,5 +12,6 @@ namespace pm::dal
 	void checkUser(std::string username, std::string password);
 	bool checkAdmin(std::string username);
 	void showUserProjects(std::string username);
-	void showMyProjects(std::string username);
+	void showUserCreatedProjects(std::string username);
+	void updateProjects(std::string title, std::string newTitle, std::string description, std::string username);
 }

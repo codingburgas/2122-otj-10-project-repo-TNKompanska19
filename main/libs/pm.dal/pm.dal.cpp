@@ -26,6 +26,24 @@ namespace pm::dal
         std::cerr << e.what() << std::endl;
     }
 
+    auto getIdByProjectName(string title) try
+    {
+        auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
+        nanodbc::connection conn(connstr);
+
+        string query = NANODBC_TEXT("SELECT Id FROM Projects WHERE Title = '" + title + "'");
+        auto result = nanodbc::execute(conn, query);
+        for (auto i = 1; result.next(); ++i)
+        {
+            auto id = result.get<int>(0);
+            return id;
+        }
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
     void insertUsersDB(string username, string firstName, string lastName, string pass) try
     {
         nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
@@ -218,7 +236,7 @@ namespace pm::dal
         std::cerr << e.what() << std::endl;
     }
 
-    void showMyProjects(string username)
+    void showUserCreatedProjects(string username)
     {
         auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
         nanodbc::connection conn(connstr);
@@ -232,6 +250,15 @@ namespace pm::dal
             y += 2;
             std::cout << title << "\n";
         }
+    }
+
+    void updateProjects(string title, string newTitle, string description, string username)
+    {
+        nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
+        nanodbc::statement statement(connection);
+        string result = "UPDATE Projects SET Title = '" + newTitle + "' , [Description] = '" + description + "' WHERE Title = '" + title + "' AND CreatorID = " + to_string(getIdByUsername(username));
+        prepare(statement, result);
+        execute(statement);
     }
 }
 
