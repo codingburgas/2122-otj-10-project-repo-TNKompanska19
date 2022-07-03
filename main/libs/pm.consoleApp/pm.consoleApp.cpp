@@ -494,6 +494,8 @@ namespace pm::consoleApp
 		cout << "PRESS CTRL + E TO EDIT PROJECTS";
 		pm::tools::consoleCoordinates(40, 37);
 		cout << "PRESS CTRL + D TO DELETE PROJECTS";
+		pm::tools::consoleCoordinates(40, 39);
+		cout << "PRESS CTRL + V TO VIEW PROJECTS";
 
 		switch (_getch())
 		{
@@ -545,6 +547,28 @@ namespace pm::consoleApp
 			label(30, 1);
 			border(107, 0, 51);
 			userOptions(username);
+		}break;	
+
+		case CTRL_KEYPRESS('v'):
+		{
+			system("CLS");
+			border(0, 0, 51);
+			label(30, 1);
+			border(107, 0, 51);
+			pm::tools::consoleCoordinates(40, 21);
+			cout << "Enter the name of the project you want to view:";
+			pm::tools::consoleCoordinates(40, 22);
+			string name;
+			cin.ignore();
+			getline(cin, name);
+			pm::dal::viewProject(name);
+			pm::dal::viewTasksInProject(name);
+			pm::dal::viewTeamsInProject(name);
+			/*system("CLS");
+			border(0, 0, 51);
+			label(30, 1);
+			border(107, 0, 51);
+			userOptions(username);*/
 		}
 
 		}

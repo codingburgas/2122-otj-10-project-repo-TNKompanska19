@@ -269,6 +269,69 @@ namespace pm::dal
         prepare(statement, result);
         execute(statement);
     }
+
+    void viewProject(string name)
+    {
+        auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
+        nanodbc::connection conn(connstr);
+        string query = NANODBC_TEXT("SELECT Title, [Description] FROM Projects WHERE Title = '" + name + "'");
+        auto result = nanodbc::execute(conn, query);
+        string title;
+        string description;
+        for (long i = 1; result.next(); ++i)
+        {
+              title = result.get<std::string>(0);
+              description = result.get<std::string>(1);
+            
+        }
+        system("CLS");
+        pm::consoleApp::border(0, 0, 51);
+        pm::consoleApp::label(30, 1);
+        pm::consoleApp::border(107, 0, 51);
+        pm::tools::consoleCoordinates(45, 20);
+        cout << "Project title: " << title;
+        pm::tools::consoleCoordinates(45, 21);
+        cout << "Project description: ";
+        pm::tools::consoleCoordinates(45, 22);
+        cout << description;
+        
+    }
+
+    void viewTasksInProject(string name)
+    {
+        auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
+        nanodbc::connection conn(connstr);
+        string query = NANODBC_TEXT("SELECT TOP 5 Title FROM Tasks WHERE ProjectID = " + to_string(getIdByProjectName(name)));
+        auto result = nanodbc::execute(conn, query);
+        string task;
+        pm::tools::consoleCoordinates(45, 24);
+        cout << "Tasks:";
+        int y = 25;
+        for (long i = 1; result.next(); ++i)
+        {
+            pm::tools::consoleCoordinates(45, y);
+            task = result.get<std::string>(0);
+            cout << task;
+            y++;
+        }
+    }
+
+    void viewTeamsInProject(string name)
+    {
+        auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
+        nanodbc::connection conn(connstr);
+        string query = NANODBC_TEXT("SELECT Title FROM Teams WHERE ProjectID = " + to_string(getIdByProjectName(name)));
+        auto result = nanodbc::execute(conn, query);
+        string team;
+        pm::tools::consoleCoordinates(45, 30);
+        cout << "Team:";
+        for (long i = 1; result.next(); ++i)
+        {
+            pm::tools::consoleCoordinates(45, 31);
+            team = result.get<std::string>(0);
+            cout << team;
+        }
+    }
 }
 
 
