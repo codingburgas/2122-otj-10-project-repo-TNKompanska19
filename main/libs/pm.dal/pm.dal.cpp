@@ -157,7 +157,7 @@ namespace pm::dal
         std::cerr << e.what() << std::endl;
     }
 
-    void userProjects(string username) try
+    void showUserProjects(string username) try
     {
         auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
         nanodbc::connection conn(connstr);
@@ -218,14 +218,20 @@ namespace pm::dal
         std::cerr << e.what() << std::endl;
     }
 
-    void createProject(string projectName)
+    void showMyProjects(string username)
     {
-        nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
-        nanodbc::statement statement(connection);
-        string result = "";
-        prepare(statement, result);
-
-        execute(statement);
+        auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
+        nanodbc::connection conn(connstr);
+        int y = 20;
+        string query = NANODBC_TEXT("SELECT Title FROM Projects WHERE CreatorID = " + to_string(getIdByUsername(username)));
+        auto result = nanodbc::execute(conn, query);
+        for (long i = 1; result.next(); ++i)
+        {
+            auto title = result.get<std::string>(0);
+            pm::tools::consoleCoordinates(45, y);
+            y += 2;
+            std::cout << title << "\n";
+        }
     }
 }
 

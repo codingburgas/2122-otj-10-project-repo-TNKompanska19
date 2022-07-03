@@ -195,7 +195,11 @@ namespace pm::consoleApp
 		{
 		case 1:
 		{
-
+			system("CLS");
+			border(0, 0, 51);
+			label(30, 1);
+			border(107, 0, 51);
+			pm::dal::showMyProjects(username);
 		}break;
 		case 2:
 		{
@@ -203,7 +207,7 @@ namespace pm::consoleApp
 			border(0, 0, 51);
 			label(30, 1);
 			border(107, 0, 51);
-			pm::dal::userProjects(username);
+			pm::dal::showUserProjects(username);
 		}break;
 		case 3:
 		{
@@ -223,6 +227,11 @@ namespace pm::consoleApp
 			string description;
 			getline(cin, description);
 			pm::dal::insertProjectsDB(name, description, username);
+			system("CLS");
+			border(0, 0, 51);
+			label(30, 1);
+			border(107, 0, 51);
+			userOptions(username);
 		}
 		}
 		
