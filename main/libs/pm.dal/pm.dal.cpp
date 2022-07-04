@@ -380,6 +380,15 @@ namespace pm::dal
         execute(statement);
     }
 
+    void deleteUsers(string username)
+    {
+        nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
+        nanodbc::statement statement(connection);
+        string result = "DELETE FROM Users WHERE Username = '" + username + "'";
+        prepare(statement, result);
+        execute(statement);
+    }
+
     void viewProject(string name)
     {
         auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database

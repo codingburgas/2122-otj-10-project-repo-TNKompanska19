@@ -719,21 +719,38 @@ namespace pm::consoleApp
 				adminOptions(username);
 			}break;
 
-			case CTRL_KEYPRESS('v'):
+			case CTRL_KEYPRESS('i'):
 			{
 				system("CLS");
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);
 				pm::consoleApp::mainMenu::border(107, 0, 51);
-				pm::tools::consoleCoordinates(40, 21);
-				cout << "Enter the name of the project you want to view:";
-				pm::tools::consoleCoordinates(40, 22);
-				string name;
-				cin.ignore();
-				getline(cin, name);
-				pm::dal::viewProject(name);
-				pm::dal::viewTasksInProject(name);
-				pm::dal::viewTeamsInProject(name);
+				pm::tools::consoleCoordinates(45, 15);
+				cout << "ENTER FIRST NAME:";
+				pm::tools::consoleCoordinates(45, 16);
+				string firstName;
+				cin >> firstName;
+				pm::tools::consoleCoordinates(45, 18);
+				cout << "ENTER LAST NAME: ";
+				pm::tools::consoleCoordinates(45, 19);
+				string lastName;
+				cin >> lastName;
+				pm::tools::consoleCoordinates(45, 21);
+				cout << "ENTER USERNAME: ";
+				pm::tools::consoleCoordinates(45, 22);
+				string username;
+				cin >> username;
+				pm::tools::consoleCoordinates(45, 24);
+				cout << "ENTER PASSWORD: ";
+				pm::tools::consoleCoordinates(45, 25);
+				string pass;
+				cin >> pass;
+				pm::dal::insertUsersDB(username, firstName, lastName, pass);
+				system("CLS");
+				pm::consoleApp::mainMenu::border(0, 0, 51);
+				pm::consoleApp::mainMenu::label(30, 1);
+				pm::consoleApp::mainMenu::border(107, 0, 51);
+				adminOptions(username);
 				switch (_getch())
 				{
 				case ESCAPE:
@@ -744,37 +761,27 @@ namespace pm::consoleApp
 					pm::consoleApp::mainMenu::border(107, 0, 51);
 					pm::dal::showUserCreatedProjects(username);
 					//createdProjectsOptions(username);
+				}break;
 				}
-				}
-			}
-			case CTRL_KEYPRESS('t'):
+			}break;
+			case CTRL_KEYPRESS('d'):
 			{
 				system("CLS");
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);
 				pm::consoleApp::mainMenu::border(107, 0, 51);
-				pm::tools::consoleCoordinates(40, 21);
-				cout << "Enter the name of the project you want to add task:";
+				pm::tools::consoleCoordinates(35, 21);
+				cout << "Enter the username of the user you want to delete:";
 				pm::tools::consoleCoordinates(40, 22);
 				string name;
 				cin.ignore();
 				getline(cin, name);
-				pm::tools::consoleCoordinates(40, 24);
-				cout << "Enter the title of the task:";
-				pm::tools::consoleCoordinates(40, 25);
-				string task;
-				getline(cin, task);
-				pm::tools::consoleCoordinates(40, 26);
-				cout << "Enter the description of the task:";
-				pm::tools::consoleCoordinates(40, 27);
-				string description;
-				getline(cin, description);
-				pm::dal::insertTasks(task, description, name);
+				pm::dal::deleteUsers(name);
 				system("CLS");
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);
 				pm::consoleApp::mainMenu::border(107, 0, 51);
-				//userOptions(username);
+				adminOptions(username);
 			}break;
 
 			}
