@@ -19,6 +19,7 @@
 #include "mainMenu.h"
 #include "registrationForm.h"
 #include "userView.h"
+#include "adminView.h"
 
 #define KEY_UP 72
 #define KEY_DOWN 80

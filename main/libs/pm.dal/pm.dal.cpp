@@ -122,6 +122,14 @@ namespace pm::dal
         std::cerr << e.what() << std::endl;
     }
 
+    void makeAnAdmin(string username)
+    {
+        nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
+        nanodbc::statement statement(connection);
+        prepare(statement, "UPDATE Users SET RoleID = 2 WHERE Username = '" + username + "'");
+        execute(statement);
+    }
+
     void insertUsersDB(string username, string firstName, string lastName, string pass) try
     {
         nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
@@ -434,6 +442,16 @@ namespace pm::dal
             cout << team;
         }
     }
+
+    void updateUsers(string username, string firstName, string lastName, string newUsername)
+    {
+        nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
+        nanodbc::statement statement(connection);
+        string result = "UPDATE Users SET FirstName = '" + firstName + "' , LastName = '" + lastName + "', Username = '" + newUsername + "' WHERE Username = '" + username + "'";
+        prepare(statement, result);
+        execute(statement);
+    }
+
 }
 
 
