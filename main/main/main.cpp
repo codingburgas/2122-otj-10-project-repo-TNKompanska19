@@ -2,6 +2,8 @@
 #include <string>
 #include "..\libs\pm.dal\UserStore.h"
 #include "..\libs\pm.consoleApp\mainMenu.h"
+#include "..\libs\pm.bll\sha256.h"
+
 using namespace std;
 int main()
 {

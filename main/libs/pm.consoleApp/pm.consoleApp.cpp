@@ -377,8 +377,8 @@ namespace pm::consoleApp
 			pm::tools::consoleCoordinates(45, 25);
 			string pass;
 			cin >> pass;
-
-			pm::dal::insertUsersDB(username, firstName, lastName, pass);
+			string password = pm::bll::passwordHashing::sha256(pass);
+			pm::dal::insertUsersDB(username, firstName, lastName, password);
 			system("CLS");
 			pm::consoleApp::mainMenu::mainMenu();
 		}
@@ -395,8 +395,8 @@ namespace pm::consoleApp
 			pm::tools::consoleCoordinates(45, 25);
 			string pass;
 			cin >> pass;
-
-			pm::dal::checkUser(username, pass);
+			string password = pm::bll::passwordHashing::sha256(pass);
+			pm::dal::checkUser(username, password);
 		}
 	}
 
@@ -782,7 +782,8 @@ namespace pm::consoleApp
 				pm::tools::consoleCoordinates(45, 25);
 				string pass;
 				cin >> pass;
-				pm::dal::insertUsersDB(username, firstName, lastName, pass);
+				string password = pm::bll::passwordHashing::sha256(pass);
+				pm::dal::insertUsersDB(username, firstName, lastName, password);
 				system("CLS");
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);

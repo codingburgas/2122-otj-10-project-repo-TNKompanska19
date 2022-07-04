@@ -8,24 +8,13 @@
 #define PCH_H
 
 // add headers that you want to pre-compile here
+
+ /* interface header */
 #include <iostream>
-#include <string>
-#include <windows.h>
-#include <conio.h>
+#include <cstring>
+#include <fstream>
+#include "sha256.h"
 
-#include "..\pm.bll\sha256.h"
-#include "..\pm.tools\extraFunctions.h"
-#include "..\pm.dal\UserStore.h"
-#include "mainMenu.h"
-#include "registrationForm.h"
-#include "userView.h"
-#include "adminView.h"
+#pragma warning(disable : 4996)
 
-#define KEY_UP 72
-#define KEY_DOWN 80
-#define KEY_ENTER 13
-#define ESCAPE 27
-#define CTRL_KEYPRESS(k) ((k)  & 0x1f) 
-
-using namespace std;
 #endif //PCH_H
