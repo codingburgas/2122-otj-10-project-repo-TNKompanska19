@@ -43,6 +43,62 @@ namespace pm::dal
         std::cerr << e.what() << std::endl;
     }
 
+    void showUsers() try
+    {
+        auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
+        nanodbc::connection conn(connstr);
+        string query = NANODBC_TEXT("SELECT Username, FirstName, LastName FROM Users");
+        auto result = nanodbc::execute(conn, query);
+        string username, firstName, lastName;
+        pm::tools::consoleCoordinates(45, 15);
+        cout << "USERS:";
+        int y = 20;
+        for (long i = 1; result.next(); ++i)
+        {
+            pm::tools::consoleCoordinates(35, y);
+            username = result.get<std::string>(0);
+            firstName = result.get<std::string>(1);
+            lastName = result.get<std::string>(2);
+            cout << "Full name: " << firstName << " " << lastName;
+            y++;
+            pm::tools::consoleCoordinates(35, y);
+            username = result.get<std::string>(0);
+            cout << "Username: " << username;
+            y+=2;
+        }
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    void showProjects() try
+    {
+        auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
+        nanodbc::connection conn(connstr);
+        string query = NANODBC_TEXT("SELECT Title, [Description] FROM Projects");
+        auto result = nanodbc::execute(conn, query);
+        string title, description;
+        pm::tools::consoleCoordinates(45, 15);
+        cout << "PROJECTS:";
+        int y = 20;
+        for (long i = 1; result.next(); ++i)
+        {
+            pm::tools::consoleCoordinates(35, y);
+            title = result.get<std::string>(0);
+            description = result.get<std::string>(1);
+            cout << "Title: " << title;
+            y++;
+            pm::tools::consoleCoordinates(35, y);
+            cout << "Description: " << description;
+            y += 2;
+        }
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
     void insertUsersDB(string username, string firstName, string lastName, string pass) try
     {
         nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
@@ -231,7 +287,11 @@ namespace pm::dal
         {
             if (checkAdmin(username) == true)
             {
-                cout << "Admin panel";
+                system("CLS");
+                pm::consoleApp::mainMenu::border(0, 0, 51);
+                pm::consoleApp::mainMenu::label(30, 1);
+                pm::consoleApp::mainMenu::border(107, 0, 51);
+                pm::consoleApp::adminView::adminOptions(username);
             }
             else
             {

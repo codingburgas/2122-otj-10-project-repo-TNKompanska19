@@ -17,6 +17,7 @@
 #include "..\nanodbc\nanodbc.h"
 #include "..\pm.consoleApp\mainMenu.h"
 #include "..\pm.consoleApp\userView.h"
+#include "..\pm.consoleApp\adminView.h"
 #include "..\pm.tools\extraFunctions.h"
 using namespace std;
 

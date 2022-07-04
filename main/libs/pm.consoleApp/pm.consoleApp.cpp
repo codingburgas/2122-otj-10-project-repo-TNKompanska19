@@ -648,6 +648,128 @@ namespace pm::consoleApp
 			}
 		}
 	}
+
+	namespace adminView
+	{
+		void adminOptions(string username)
+		{
+			pm::tools::consoleCoordinates(45, 21);
+			cout << "1 - USERS ";
+			pm::tools::consoleCoordinates(45, 23);
+			cout << "2 - PROJECTS";
+			pm::tools::consoleCoordinates(45, 25);
+			cout << "3 - TEAMS ";
+			pm::tools::consoleCoordinates(45, 30);
+			cout << "Enter your choice: ";
+			int choice;
+			cin >> choice;
+			switch (choice)
+			{
+			case 1:
+			{
+				system("CLS");
+				pm::consoleApp::mainMenu::border(0, 0, 51);
+				pm::consoleApp::mainMenu::label(30, 1);
+				pm::consoleApp::mainMenu::border(107, 0, 51);
+				pm::dal::showUsers();
+				switch (_getch())
+				{
+				case ESCAPE:
+				{
+					system("CLS");
+					pm::consoleApp::mainMenu::border(0, 0, 51);
+					pm::consoleApp::mainMenu::label(30, 1);
+					pm::consoleApp::mainMenu::border(107, 0, 51);
+				    adminOptions(username);
+				}break;
+				}
+			}break;
+			case 2:
+			{
+				system("CLS");
+				pm::consoleApp::mainMenu::border(0, 0, 51);
+				pm::consoleApp::mainMenu::label(30, 1);
+				pm::consoleApp::mainMenu::border(107, 0, 51);
+				pm::dal::showProjects();
+				switch (_getch())
+				{
+				case ESCAPE:
+				{
+					system("CLS");
+					pm::consoleApp::mainMenu::border(0, 0, 51);
+					pm::consoleApp::mainMenu::label(30, 1);
+					pm::consoleApp::mainMenu::border(107, 0, 51);
+					adminOptions(username);
+				}break;
+				}
+			}break;
+			case 3:
+			{
+				system("CLS");
+				pm::consoleApp::mainMenu::border(0, 0, 51);
+				pm::consoleApp::mainMenu::label(30, 1);
+				pm::consoleApp::mainMenu::border(107, 0, 51);
+				pm::tools::consoleCoordinates(45, 15);
+				cout << "ENTER PROJECT NAME:";
+				pm::tools::consoleCoordinates(45, 16);
+				string name;
+				cin.ignore();
+				getline(cin, name);
+				pm::tools::consoleCoordinates(45, 18);
+				cout << "ENTER PROJECT DESCRIPTION:";
+				pm::tools::consoleCoordinates(45, 19);
+				string description;
+				getline(cin, description);
+				pm::dal::insertProjectsDB(name, description, username);
+				pm::tools::consoleCoordinates(45, 20);
+				cout << "ENTER PROJECT TEAM:";
+				pm::tools::consoleCoordinates(45, 21);
+				string team;
+				getline(cin, team);
+				pm::dal::insertTeams(team, name);
+				pm::tools::consoleCoordinates(45, 22);
+				cout << "HOW MANY USERS WILL BE IN YOUR TEAM: ";
+				pm::tools::consoleCoordinates(45, 23);
+				int users;
+				cin >> users;
+				pm::dal::insertUsersInTeam(users, team);
+				system("CLS");
+				pm::consoleApp::mainMenu::border(0, 0, 51);
+				pm::consoleApp::mainMenu::label(30, 1);
+				pm::consoleApp::mainMenu::border(107, 0, 51);
+				//userOptions(username);
+			}break;
+			case 4:
+			{
+				system("CLS");
+				pm::consoleApp::mainMenu::border(0, 0, 51);
+				pm::consoleApp::mainMenu::label(30, 1);
+				pm::consoleApp::mainMenu::border(107, 0, 51);
+				pm::dal::showUserTeams(username);
+				switch (_getch())
+				{
+				case ESCAPE:
+				{
+					system("CLS");
+					pm::consoleApp::mainMenu::border(0, 0, 51);
+					pm::consoleApp::mainMenu::label(30, 1);
+					pm::consoleApp::mainMenu::border(107, 0, 51);
+					//userOptions(username);
+				}break;
+				}
+			}
+			}
+
+			switch (_getch())
+			{
+			case ESCAPE:
+			{
+				system("CLS");
+				pm::consoleApp::mainMenu::mainMenu();
+			}
+			}
+		}
+	}
 }
 
 

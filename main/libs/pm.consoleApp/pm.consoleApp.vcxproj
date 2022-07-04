@@ -153,6 +153,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="adminView.h" />
     <ClInclude Include="mainMenu.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="registrationForm.h" />
