@@ -651,6 +651,43 @@ namespace pm::consoleApp
 
 	namespace adminView
 	{
+		void projectPanelOptions(string username)
+		{
+			pm::tools::consoleCoordinates(40, 42);
+			cout << "PRESS CTRL + V TO VIEW PROJECT INFORMATION";
+
+			switch (_getch())
+			{
+			case CTRL_KEYPRESS('v'):
+			{
+				system("CLS");
+				pm::consoleApp::mainMenu::border(0, 0, 51);
+				pm::consoleApp::mainMenu::label(30, 1);
+				pm::consoleApp::mainMenu::border(107, 0, 51);
+				pm::tools::consoleCoordinates(33, 21);
+				cout << "Enter the name of the project you want to view:";
+				pm::tools::consoleCoordinates(40, 22);
+				string name;
+				cin.ignore();
+				getline(cin, name);
+				pm::dal::viewProject(name);
+				pm::dal::viewTasksInProject(name);
+				pm::dal::viewTeamsInProject(name);
+				switch (_getch())
+				{
+				case ESCAPE:
+				{
+					system("CLS");
+					pm::consoleApp::mainMenu::border(0, 0, 51);
+					pm::consoleApp::mainMenu::label(30, 1);
+					pm::consoleApp::mainMenu::border(107, 0, 51);
+					pm::consoleApp::adminView::adminOptions(username);
+				}break;
+				}
+				
+			}break;
+			}
+		}
 		void userPanelOptions(string username)
 		{
 			pm::tools::consoleCoordinates(40, 42);
@@ -911,6 +948,7 @@ namespace pm::consoleApp
 				pm::consoleApp::mainMenu::label(30, 1);
 				pm::consoleApp::mainMenu::border(107, 0, 51);
 				pm::dal::showProjects();
+				projectPanelOptions(username);
 				switch (_getch())
 				{
 				case ESCAPE:
