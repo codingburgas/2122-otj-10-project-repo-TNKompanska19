@@ -21,4 +21,5 @@ namespace pm::dal
 	void showUserTeams(std::string username);
 	void showUsers();
 	void showProjects();
+	void showTeams();
 }

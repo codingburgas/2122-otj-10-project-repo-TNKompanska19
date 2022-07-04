@@ -99,6 +99,29 @@ namespace pm::dal
         std::cerr << e.what() << std::endl;
     }
 
+    void showTeams() try
+    {
+        auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
+        nanodbc::connection conn(connstr);
+        string query = NANODBC_TEXT("SELECT Title FROM Teams");
+        auto result = nanodbc::execute(conn, query);
+        string title;
+        pm::tools::consoleCoordinates(45, 15);
+        cout << "TEAMS:";
+        int y = 20;
+        for (long i = 1; result.next(); ++i)
+        {
+            pm::tools::consoleCoordinates(35, y);
+            title = result.get<std::string>(0);
+            cout << "Title: " << title;
+            y+=2;
+        }
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
     void insertUsersDB(string username, string firstName, string lastName, string pass) try
     {
         nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
