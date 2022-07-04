@@ -183,7 +183,6 @@ namespace pm::consoleApp
 						textInButton(52, 28, "Exit", 7);
 						computerFigure(68, 30);
 						border(107, 0, 51);
-						counter = 4;
 					}break;
 					case 2:
 					{
@@ -316,7 +315,7 @@ namespace pm::consoleApp
 						textInButton(52, 28, "Exit", 8);
 						computerFigure(68, 30);
 						border(107, 0, 51);
-						counter = 1;
+						counter = 5;
 					}break;
 					}
 				}break;
@@ -357,6 +356,10 @@ namespace pm::consoleApp
 						border(107, 0, 51);
 						pm::consoleApp::registrationForm::changePassword();
 					}break;
+					case 5:
+					{
+						return 0;
+					}
 					}
 				}
 				}

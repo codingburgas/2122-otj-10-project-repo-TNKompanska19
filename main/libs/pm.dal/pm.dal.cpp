@@ -9,6 +9,7 @@ namespace pm::dal
 { 
     namespace users
     {
+        // Function for getting user id
         auto getIdByUsername(string username) try
         {
             auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
@@ -27,6 +28,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
+        // Function for checking if the user exists
         void checkUser(string username, string password) try
         {
             auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
@@ -73,7 +75,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
-
+        // Function for checking if the user is admin
         bool checkAdmin(string username) try
         {
 
@@ -96,7 +98,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
-
+        // Function for showing all users
         void showUsers() try
         {
             auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
@@ -126,6 +128,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
+        // Function for making user an admin
         void makeAnAdmin(string username) try
         {
             nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
@@ -138,6 +141,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
+        // Function for adding users
         void insertUsersDB(string username, string firstName, string lastName, string pass) try
         {
             nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
@@ -159,6 +163,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
+        // Function for adding users in team
         void insertUsersInTeam(int users, string teamName)try
         {
             nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
@@ -181,6 +186,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
+        // Function for adding users in project
         void insertUsersInProject(int users, string projectName) try
         {
             nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
@@ -204,6 +210,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
+        // Function for deleting users
         void deleteUsers(string username)try
         {
             nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
@@ -217,7 +224,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
-
+        // Function for editing users
         void updateUsers(string username, string firstName, string lastName, string newUsername) try
         {
             nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
@@ -231,6 +238,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
+        // Function for changing password
         void updatePassword(string username, string password) try
         {
             nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
@@ -247,6 +255,7 @@ namespace pm::dal
 
     namespace projects
     {
+        // Function for getting project id
         int getIdByProjectName(string title) try
         {
             auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
@@ -266,7 +275,7 @@ namespace pm::dal
         }
 
 
-
+        // Function for viewing all projects
         void showProjects() try
         {
             auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
@@ -294,6 +303,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
+        // Function for adding projects
         void insertProjectsDB(string title, string description, string username) try
         {
             nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
@@ -311,6 +321,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
+        // Function for getting project id by username
         int getProjectIdByUsername(string username) try
         {
             auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
@@ -329,6 +340,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
+        // Function for viewing in which projects user is in
         void showUserProjects(string username) try
         {
             auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
@@ -349,6 +361,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
+        // Function for viewing user created projects
         void showUserCreatedProjects(string username) try
         {
             auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
@@ -368,6 +381,8 @@ namespace pm::dal
         {
             std::cerr << e.what() << std::endl;
         }
+
+        // Function for viewing projects info
         void viewProject(string name) try
         {
             auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
@@ -399,6 +414,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
+        // Function for editing projects
         void updateProjects(string title, string newTitle, string description, string username) try
         {
             nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
@@ -412,6 +428,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
+        // Function for deleting projects
         void deleteProjects(string title, string username)try
         {
             nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
@@ -429,6 +446,7 @@ namespace pm::dal
     
     namespace teams
     {
+        // Function for getting team id
         int getIdByTeamName(string teamName) try
         {
             auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
@@ -447,6 +465,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
+        // Function for showing all teams
         void showTeams() try
         {
             auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
@@ -470,6 +489,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
+        // Function for adding teams
         void insertTeams(string title, string projectName) try
         {
             nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
@@ -486,7 +506,7 @@ namespace pm::dal
         }
 
         
-
+        // Function for showing in which team user is 
         void showUserTeams(string username) try
         {
             auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
@@ -507,6 +527,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
+        // Function for viewing team in project
         void viewTeamsInProject(string name) try
         {
             auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
@@ -528,6 +549,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
+        // Function for editing teams
         void updateTeams(string title, string newTitle) try
         {
             nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
@@ -541,6 +563,7 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
+        // Function for deleting teams
         void deleteTeams(string title) try
         {
             nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
@@ -558,6 +581,7 @@ namespace pm::dal
     
     namespace tasks
     {
+        // Function for adding tasks
         void insertTasks(string title, string description, string projectName) try
         {
             nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
@@ -574,7 +598,8 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
-        void viewTasksInProject(string name)
+        // Function for viewing task in project
+        void viewTasksInProject(string name) try
         {
             auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
             nanodbc::connection conn(connstr);
@@ -591,6 +616,10 @@ namespace pm::dal
                 cout << task;
                 y++;
             }
+        }
+        catch (std::exception& e)
+        {
+            std::cerr << e.what() << std::endl;
         }
 
     }
