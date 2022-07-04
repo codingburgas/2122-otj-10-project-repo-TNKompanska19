@@ -21,3 +21,13 @@
   <h3><img src="https://i.imgur.com/0cj4vjm.png" width="30" height="20">SQL Server - Database</h3>
   <h3><img src="https://cdn.worldvectorlogo.com/logos/word-1.svg" alt="Word" width="30" height="30"> MS Word - Documentation</h3>
   <h3><img src="https://cdn.worldvectorlogo.com/logos/powerpoint-2.svg" alt="PowerPoint" width="30" height="20"> MS PowerPoint - Presentation</h3>
+  
+<h1><i>Installation</i></h1>
+<h3><i>1. Open the Command Prompt on your computer</i></h3>
+<h3><i>2. Clone the repo</i></h3>
+
+```
+git clone https://github.com/codingburgas/2122-otj-10-project-repo-TNKompanska19.git
+```
+
+<h1 align = "center"><b><i>:dizzy: Hope you have fun!!! :dizzy:</i></b></h1>
