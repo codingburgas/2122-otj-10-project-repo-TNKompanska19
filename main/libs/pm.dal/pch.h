@@ -19,6 +19,8 @@
 #include "..\pm.consoleApp\userView.h"
 #include "..\pm.consoleApp\adminView.h"
 #include "..\pm.tools\extraFunctions.h"
+#include "users.h"
+#include "projects.h"
 
 using namespace std;
 

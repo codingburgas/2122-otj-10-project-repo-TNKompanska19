@@ -378,7 +378,7 @@ namespace pm::consoleApp
 			string pass;
 			cin >> pass;
 			string password = pm::bll::passwordHashing::sha256(pass);
-			pm::dal::insertUsersDB(username, firstName, lastName, password);
+			pm::dal::users::insertUsersDB(username, firstName, lastName, password);
 			system("CLS");
 			pm::consoleApp::mainMenu::mainMenu();
 		}
@@ -396,7 +396,7 @@ namespace pm::consoleApp
 			string pass;
 			cin >> pass;
 			string password = pm::bll::passwordHashing::sha256(pass);
-			pm::dal::checkUser(username, password);
+			pm::dal::users::checkUser(username, password);
 		}
 	}
 
@@ -424,7 +424,7 @@ namespace pm::consoleApp
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);
 				pm::consoleApp::mainMenu::border(107, 0, 51);
-				pm::dal::showUserCreatedProjects(username);
+				pm::dal::projects::showUserCreatedProjects(username);
 				pm::consoleApp::userView::createdProjectsOptions(username);
 				switch (_getch())
 				{
@@ -444,7 +444,7 @@ namespace pm::consoleApp
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);
 				pm::consoleApp::mainMenu::border(107, 0, 51);
-				pm::dal::showUserProjects(username);
+				pm::dal::projects::showUserProjects(username);
 				switch (_getch())
 				{
 				case ESCAPE:
@@ -474,19 +474,19 @@ namespace pm::consoleApp
 				pm::tools::consoleCoordinates(45, 19);
 				string description;
 				getline(cin, description);
-				pm::dal::insertProjectsDB(name, description, username);
+				pm::dal::projects::insertProjectsDB(name, description, username);
 				pm::tools::consoleCoordinates(45, 20);
 				cout << "ENTER PROJECT TEAM:";
 				pm::tools::consoleCoordinates(45, 21);
 				string team;
 				getline(cin, team);
-				pm::dal::insertTeams(team, name);
+				pm::dal::teams::insertTeams(team, name);
 				pm::tools::consoleCoordinates(45, 22);
 				cout << "HOW MANY USERS WILL BE IN YOUR TEAM: ";
 				pm::tools::consoleCoordinates(45, 23);
 				int users;
 				cin >> users;
-				pm::dal::insertUsersInTeam(users, team);
+				pm::dal::users::insertUsersInTeam(users, team);
 				system("CLS");
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);
@@ -499,7 +499,7 @@ namespace pm::consoleApp
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);
 				pm::consoleApp::mainMenu::border(107, 0, 51);
-				pm::dal::showUserTeams(username);
+				pm::dal::teams::showUserTeams(username);
 				switch (_getch())
 				{
 				case ESCAPE:
@@ -559,7 +559,7 @@ namespace pm::consoleApp
 				pm::tools::consoleCoordinates(40, 27);
 				string description;
 				getline(cin, description);
-				pm::dal::updateProjects(name, newTitle, description, username);
+				pm::dal::projects::updateProjects(name, newTitle, description, username);
 				system("CLS");
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);
@@ -579,7 +579,7 @@ namespace pm::consoleApp
 				string name;
 				cin.ignore();
 				getline(cin, name);
-				pm::dal::deleteProjects(name, username);
+				pm::dal::projects::deleteProjects(name, username);
 				system("CLS");
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);
@@ -599,9 +599,9 @@ namespace pm::consoleApp
 				string name;
 				cin.ignore();
 				getline(cin, name);
-				pm::dal::viewProject(name);
-				pm::dal::viewTasksInProject(name);
-				pm::dal::viewTeamsInProject(name);
+				pm::dal::projects::viewProject(name);
+				pm::dal::tasks::viewTasksInProject(name);
+				pm::dal::teams::viewTeamsInProject(name);
 				switch (_getch())
 				{
 				case ESCAPE:
@@ -610,7 +610,7 @@ namespace pm::consoleApp
 					pm::consoleApp::mainMenu::border(0, 0, 51);
 					pm::consoleApp::mainMenu::label(30, 1);
 					pm::consoleApp::mainMenu::border(107, 0, 51);
-					pm::dal::showUserCreatedProjects(username);
+					pm::dal::projects::showUserCreatedProjects(username);
 					createdProjectsOptions(username);
 				}
 				}
@@ -637,7 +637,7 @@ namespace pm::consoleApp
 				pm::tools::consoleCoordinates(40, 27);
 				string description;
 				getline(cin, description);
-				pm::dal::insertTasks(task, description, name);
+				pm::dal::tasks::insertTasks(task, description, name);
 				system("CLS");
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);
@@ -670,9 +670,9 @@ namespace pm::consoleApp
 				string name;
 				cin.ignore();
 				getline(cin, name);
-				pm::dal::viewProject(name);
-				pm::dal::viewTasksInProject(name);
-				pm::dal::viewTeamsInProject(name);
+				pm::dal::projects::viewProject(name);
+				pm::dal::tasks::viewTasksInProject(name);
+				pm::dal::teams::viewTeamsInProject(name);
 				switch (_getch())
 				{
 				case ESCAPE:
@@ -713,7 +713,7 @@ namespace pm::consoleApp
 				pm::tools::consoleCoordinates(40, 22);
 				string name;
 				cin >> name;
-				pm::dal::makeAnAdmin(name);
+				pm::dal::users::makeAnAdmin(name);
 				system("CLS");
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);
@@ -748,7 +748,7 @@ namespace pm::consoleApp
 				pm::tools::consoleCoordinates(40, 29);
 				string newUsername;
 				getline(cin, newUsername);
-				pm::dal::updateUsers(name, firstName, lastName, newUsername);
+				pm::dal::users::updateUsers(name, firstName, lastName, newUsername);
 				system("CLS");
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);
@@ -783,7 +783,7 @@ namespace pm::consoleApp
 				string pass;
 				cin >> pass;
 				string password = pm::bll::passwordHashing::sha256(pass);
-				pm::dal::insertUsersDB(username, firstName, lastName, password);
+				pm::dal::users::insertUsersDB(username, firstName, lastName, password);
 				system("CLS");
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);
@@ -802,7 +802,7 @@ namespace pm::consoleApp
 				string name;
 				cin.ignore();
 				getline(cin, name);
-				pm::dal::deleteUsers(name);
+				pm::dal::users::deleteUsers(name);
 				system("CLS");
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);
@@ -842,7 +842,7 @@ namespace pm::consoleApp
 				pm::tools::consoleCoordinates(40, 25);
 				string newTitle;
 				getline(cin, newTitle);
-				pm::dal::updateTeams(name, newTitle);
+				pm::dal::teams::updateTeams(name, newTitle);
 				system("CLS");
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);
@@ -867,7 +867,7 @@ namespace pm::consoleApp
 				pm::tools::consoleCoordinates(45, 19);
 				string project;
 				getline(cin, project);
-				pm::dal::insertTeams(title, project);
+				pm::dal::teams::insertTeams(title, project);
 				system("CLS");
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);
@@ -881,7 +881,7 @@ namespace pm::consoleApp
 					pm::consoleApp::mainMenu::border(0, 0, 51);
 					pm::consoleApp::mainMenu::label(30, 1);
 					pm::consoleApp::mainMenu::border(107, 0, 51);
-					pm::dal::showUserCreatedProjects(username);
+					pm::dal::projects::showUserCreatedProjects(username);
 					//createdProjectsOptions(username);
 				}break;
 				}
@@ -898,7 +898,7 @@ namespace pm::consoleApp
 				string team;
 				cin.ignore();
 				getline(cin, team);
-				pm::dal::deleteUsers(team);
+				pm::dal::users::deleteUsers(team);
 				system("CLS");
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);
@@ -928,7 +928,7 @@ namespace pm::consoleApp
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);
 				pm::consoleApp::mainMenu::border(107, 0, 51);
-				pm::dal::showUsers();
+				pm::dal::users::showUsers();
 				userPanelOptions(username);
 				switch (_getch())
 				{
@@ -948,7 +948,7 @@ namespace pm::consoleApp
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);
 				pm::consoleApp::mainMenu::border(107, 0, 51);
-				pm::dal::showProjects();
+				pm::dal::projects::showProjects();
 				projectPanelOptions(username);
 				switch (_getch())
 				{
@@ -968,7 +968,7 @@ namespace pm::consoleApp
 				pm::consoleApp::mainMenu::border(0, 0, 51);
 				pm::consoleApp::mainMenu::label(30, 1);
 				pm::consoleApp::mainMenu::border(107, 0, 51);
-				pm::dal::showTeams();
+				pm::dal::teams::showTeams();
 				teamPanelOptions(username);
 				switch (_getch())
 				{

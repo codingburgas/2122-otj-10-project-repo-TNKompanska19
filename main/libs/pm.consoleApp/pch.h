@@ -15,7 +15,10 @@
 
 #include "..\pm.bll\sha256.h"
 #include "..\pm.tools\extraFunctions.h"
-#include "..\pm.dal\UserStore.h"
+#include "..\pm.dal\users.h"
+#include "..\pm.dal\projects.h"
+#include "..\pm.dal\tasks.h"
+#include "..\pm.dal\teams.h"
 #include "mainMenu.h"
 #include "registrationForm.h"
 #include "userView.h"

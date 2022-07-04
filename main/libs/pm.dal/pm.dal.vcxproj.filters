@@ -18,7 +18,16 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UserStore.h">
+    <ClInclude Include="users.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="projects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="teams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tasks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
