@@ -171,7 +171,8 @@ namespace pm::dal
                 cout << "Enter username:";
                 cin >> username;
                 y++;
-                prepare(statement, "DECLARE @TeamID INT SELECT @TeamID = Id FROM Teams WHERE Title = '" + teamName + "' UPDATE Users SET TeamID = @TeamID WHERE Username = '" + username + "'");
+                string result = "UPDATE Users SET TeamID = " + to_string(pm::dal::teams::getIdByTeamName(teamName)) + "WHERE Username = '" + username + "'";
+                prepare(statement, result);
                 execute(statement);
             }
         }
@@ -180,16 +181,22 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
-        void insertUsersInProject(string username, string projectName) try
+        void insertUsersInProject(int users, string projectName) try
         {
             nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
             nanodbc::statement statement(connection);
-            string result = "DECLARE @ProjectID INT SELECT @ProjectID = Id FROM Projects WHERE Title = '" + projectName + "' UPDATE Users SET ProjectID = @ProjectID WHERE Username = '" + username + "'";
-            prepare(statement, result);
-            //statement.bind(0, username.c_str());
-            //statement.bind(1, projectName.c_str());
-
-            execute(statement);
+            int y = 27;
+            string username;
+            for (int i = 1; i <= users; i++)
+            {
+                pm::tools::consoleCoordinates(45, y);
+                cout << "Enter username:";
+                cin >> username;
+                y++;
+                string result = "UPDATE Users SET ProjectID = " + to_string(pm::dal::projects::getIdByProjectName(projectName)) + "WHERE Username = '" + username + "'";
+                prepare(statement, result);
+                execute(statement);
+            }
 
         }
         catch (std::exception& e)
@@ -223,11 +230,24 @@ namespace pm::dal
         {
             std::cerr << e.what() << std::endl;
         }
+
+        void updatePassword(string username, string password) try
+        {
+            nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
+            nanodbc::statement statement(connection);
+            string result = "UPDATE Users SET [Password] = '" + password + "' WHERE Username = '" + username + "'";
+            prepare(statement, result);
+            execute(statement);
+        }
+        catch (std::exception& e)
+        {
+            std::cerr << e.what() << std::endl;
+        }
     }
 
     namespace projects
     {
-        auto getIdByProjectName(string title) try
+        int getIdByProjectName(string title) try
         {
             auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
             nanodbc::connection conn(connstr);
@@ -291,12 +311,30 @@ namespace pm::dal
             std::cerr << e.what() << std::endl;
         }
 
+        int getProjectIdByUsername(string username) try
+        {
+            auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
+            nanodbc::connection conn(connstr);
+
+            string query = NANODBC_TEXT("SELECT ProjectID FROM Users WHERE Username = '" + username + "'");
+            auto result = nanodbc::execute(conn, query);
+            for (auto i = 1; result.next(); ++i)
+            {
+                auto id = result.get<int>(0);
+                return id;
+            }
+        }
+        catch (std::exception& e)
+        {
+            std::cerr << e.what() << std::endl;
+        }
+
         void showUserProjects(string username) try
         {
             auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
             nanodbc::connection conn(connstr);
             int y = 20;
-            string query = NANODBC_TEXT("SELECT Title FROM Projects WHERE UserID = " + to_string(pm::dal::users::getIdByUsername(username)));
+            string query = NANODBC_TEXT("SELECT Title FROM Projects WHERE Id = " + to_string(pm::dal::projects::getProjectIdByUsername(username)));
             auto result = nanodbc::execute(conn, query);
             for (long i = 1; result.next(); ++i)
             {
@@ -391,6 +429,24 @@ namespace pm::dal
     
     namespace teams
     {
+        int getIdByTeamName(string teamName) try
+        {
+            auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
+            nanodbc::connection conn(connstr);
+
+            string query = NANODBC_TEXT("SELECT Id FROM Teams WHERE Title = '" + teamName + "'");
+            auto result = nanodbc::execute(conn, query);
+            for (auto i = 1; result.next(); ++i)
+            {
+                auto id = result.get<int>(0);
+                return id;
+            }
+        }
+        catch (std::exception& e)
+        {
+            std::cerr << e.what() << std::endl;
+        }
+
         void showTeams() try
         {
             auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
@@ -428,6 +484,8 @@ namespace pm::dal
         {
             std::cerr << e.what() << std::endl;
         }
+
+        
 
         void showUserTeams(string username) try
         {
@@ -482,6 +540,7 @@ namespace pm::dal
         {
             std::cerr << e.what() << std::endl;
         }
+
         void deleteTeams(string title) try
         {
             nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
@@ -499,7 +558,7 @@ namespace pm::dal
     
     namespace tasks
     {
-        void insertTasks(string title, string description, string projectName)try
+        void insertTasks(string title, string description, string projectName) try
         {
             nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
             nanodbc::statement statement(connection);

@@ -8,6 +8,8 @@ namespace pm::consoleApp
 		void registration();
 		// Function for logging in
 		void login();
+		// Function for changing password
+		void changePassword();
 	}
 
 }

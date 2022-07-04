@@ -21,6 +21,9 @@
 #include "..\pm.tools\extraFunctions.h"
 #include "users.h"
 #include "projects.h"
+#include "teams.h"
+#include "tasks.h"
+
 
 using namespace std;
 

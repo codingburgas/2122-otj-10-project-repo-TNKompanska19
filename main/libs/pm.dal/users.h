@@ -12,8 +12,9 @@ namespace pm::dal
 		void makeAnAdmin(std::string username);
 		void insertUsersDB(std::string username, std::string firstName, std::string lastName, std::string pass);
 		void insertUsersInTeam(int users, std::string teamName);
-		void insertUsersInProject(std::string username, std::string projectName);
+		void insertUsersInProject(int users, std::string projectName);
 		void deleteUsers(std::string username);
 		void updateUsers(std::string username, std::string firstName, std::string lastName, std::string newUsername);
+		void updatePassword(std::string username, std::string password);
 	}
 }

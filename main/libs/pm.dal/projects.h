@@ -5,6 +5,8 @@ namespace pm::dal
 {
 	namespace projects
 	{
+		int getProjectIdByUsername(std::string username);
+		int getIdByProjectName(std::string title);
 		void insertProjectsDB(std::string title, std::string description, std::string username);
 		void showUserProjects(std::string username);
 		void showUserCreatedProjects(std::string username);
