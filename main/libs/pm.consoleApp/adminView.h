@@ -7,5 +7,6 @@ namespace pm::consoleApp
 	{
 		void adminOptions(std::string username);
 		void userPanelOptions(std::string username);
+		void teamPanelOptions(std::string username);
 	}
 }

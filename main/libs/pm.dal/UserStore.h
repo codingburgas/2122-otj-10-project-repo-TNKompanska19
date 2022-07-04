@@ -25,4 +25,5 @@ namespace pm::dal
 	void makeAnAdmin(std::string username);
 	void updateUsers(std::string username, std::string firstName, std::string lastName, std::string newUsername);
 	void deleteUsers(std::string username);
+	void updateTeams(std::string title, std::string newTitle);
 }

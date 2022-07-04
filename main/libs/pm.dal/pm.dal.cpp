@@ -389,6 +389,15 @@ namespace pm::dal
         execute(statement);
     }
 
+    void deleteTeams(string title)
+    {
+        nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
+        nanodbc::statement statement(connection);
+        string result = "DELETE FROM Teams WHERE Title = '" + title + "'";
+        prepare(statement, result);
+        execute(statement);
+    }
+
     void viewProject(string name)
     {
         auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;"); // an ODBC connection string to your database
@@ -457,6 +466,15 @@ namespace pm::dal
         nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
         nanodbc::statement statement(connection);
         string result = "UPDATE Users SET FirstName = '" + firstName + "' , LastName = '" + lastName + "', Username = '" + newUsername + "' WHERE Username = '" + username + "'";
+        prepare(statement, result);
+        execute(statement);
+    }
+
+    void updateTeams(string title, string newTitle)
+    {
+        nanodbc::connection connection("Driver={ODBC Driver 17 for SQL Server};Server=.\\SQLExpress;Database=ProjectManager;Trusted_Connection=yes;");
+        nanodbc::statement statement(connection);
+        string result = "UPDATE Teams SET Title = '" + newTitle + "' WHERE Title = '" + title + "'";
         prepare(statement, result);
         execute(statement);
     }

@@ -751,18 +751,6 @@ namespace pm::consoleApp
 				pm::consoleApp::mainMenu::label(30, 1);
 				pm::consoleApp::mainMenu::border(107, 0, 51);
 				adminOptions(username);
-				switch (_getch())
-				{
-				case ESCAPE:
-				{
-					system("CLS");
-					pm::consoleApp::mainMenu::border(0, 0, 51);
-					pm::consoleApp::mainMenu::label(30, 1);
-					pm::consoleApp::mainMenu::border(107, 0, 51);
-					pm::dal::showUserCreatedProjects(username);
-					//createdProjectsOptions(username);
-				}break;
-				}
 			}break;
 			case CTRL_KEYPRESS('d'):
 			{
@@ -784,6 +772,101 @@ namespace pm::consoleApp
 				adminOptions(username);
 			}break;
 
+			}
+		}
+
+		void teamPanelOptions(string username)
+		{
+			pm::tools::consoleCoordinates(40, 46);
+			cout << "PRESS CTRL + I TO ADD TEAM";
+			pm::tools::consoleCoordinates(40, 44);
+			cout << "PRESS CTRL + E TO EDIT TEAM";
+			pm::tools::consoleCoordinates(40, 48);
+			cout << "PRESS CTRL + D TO DELETE TEAM";
+
+
+			switch (_getch())
+			{
+			case CTRL_KEYPRESS('e'):
+			{
+				system("CLS");
+				pm::consoleApp::mainMenu::border(0, 0, 51);
+				pm::consoleApp::mainMenu::label(30, 1);
+				pm::consoleApp::mainMenu::border(107, 0, 51);
+				pm::tools::consoleCoordinates(40, 21);
+				cout << "Enter the title of the team you want to edit:";
+				pm::tools::consoleCoordinates(40, 22);
+				string name;
+				cin.ignore();
+				getline(cin, name);
+				pm::tools::consoleCoordinates(40, 24);
+				cout << "Enter new title of the team:";
+				pm::tools::consoleCoordinates(40, 25);
+				string newTitle;
+				getline(cin, newTitle);
+				pm::dal::updateTeams(name, newTitle);
+				system("CLS");
+				pm::consoleApp::mainMenu::border(0, 0, 51);
+				pm::consoleApp::mainMenu::label(30, 1);
+				pm::consoleApp::mainMenu::border(107, 0, 51);
+				adminOptions(username);
+			}break;
+
+			case CTRL_KEYPRESS('i'):
+			{
+				system("CLS");
+				pm::consoleApp::mainMenu::border(0, 0, 51);
+				pm::consoleApp::mainMenu::label(30, 1);
+				pm::consoleApp::mainMenu::border(107, 0, 51);
+				pm::tools::consoleCoordinates(45, 15);
+				cout << "ENTER TITLE OF THE TEAM:";
+				pm::tools::consoleCoordinates(45, 16);
+				string title;
+				cin.ignore();
+				getline(cin, title);
+				pm::tools::consoleCoordinates(45, 18);
+				cout << "ENTER THE TEAM'S PROJECT: ";
+				pm::tools::consoleCoordinates(45, 19);
+				string project;
+				getline(cin, project);
+				pm::dal::insertTeams(title, project);
+				system("CLS");
+				pm::consoleApp::mainMenu::border(0, 0, 51);
+				pm::consoleApp::mainMenu::label(30, 1);
+				pm::consoleApp::mainMenu::border(107, 0, 51);
+				adminOptions(username);
+				switch (_getch())
+				{
+				case ESCAPE:
+				{
+					system("CLS");
+					pm::consoleApp::mainMenu::border(0, 0, 51);
+					pm::consoleApp::mainMenu::label(30, 1);
+					pm::consoleApp::mainMenu::border(107, 0, 51);
+					pm::dal::showUserCreatedProjects(username);
+					//createdProjectsOptions(username);
+				}break;
+				}
+			}break;
+			case CTRL_KEYPRESS('d'):
+			{
+				system("CLS");
+				pm::consoleApp::mainMenu::border(0, 0, 51);
+				pm::consoleApp::mainMenu::label(30, 1);
+				pm::consoleApp::mainMenu::border(107, 0, 51);
+				pm::tools::consoleCoordinates(35, 21);
+				cout << "Enter the title of the team you want to delete:";
+				pm::tools::consoleCoordinates(40, 22);
+				string team;
+				cin.ignore();
+				getline(cin, team);
+				pm::dal::deleteUsers(team);
+				system("CLS");
+				pm::consoleApp::mainMenu::border(0, 0, 51);
+				pm::consoleApp::mainMenu::label(30, 1);
+				pm::consoleApp::mainMenu::border(107, 0, 51);
+				adminOptions(username);
+			}break;
 			}
 		}
 
@@ -817,7 +900,7 @@ namespace pm::consoleApp
 					pm::consoleApp::mainMenu::border(0, 0, 51);
 					pm::consoleApp::mainMenu::label(30, 1);
 					pm::consoleApp::mainMenu::border(107, 0, 51);
-				    adminOptions(username);
+					adminOptions(username);
 				}break;
 				}
 			}break;
@@ -847,6 +930,7 @@ namespace pm::consoleApp
 				pm::consoleApp::mainMenu::label(30, 1);
 				pm::consoleApp::mainMenu::border(107, 0, 51);
 				pm::dal::showTeams();
+				teamPanelOptions(username);
 				switch (_getch())
 				{
 				case ESCAPE:
@@ -859,25 +943,7 @@ namespace pm::consoleApp
 				}break;
 				}
 			}break;
-			case 4:
-			{
-				system("CLS");
-				pm::consoleApp::mainMenu::border(0, 0, 51);
-				pm::consoleApp::mainMenu::label(30, 1);
-				pm::consoleApp::mainMenu::border(107, 0, 51);
-				pm::dal::showUserTeams(username);
-				switch (_getch())
-				{
-				case ESCAPE:
-				{
-					system("CLS");
-					pm::consoleApp::mainMenu::border(0, 0, 51);
-					pm::consoleApp::mainMenu::label(30, 1);
-					pm::consoleApp::mainMenu::border(107, 0, 51);
-					//userOptions(username);
-				}break;
-				}
-			}
+
 			}
 
 			switch (_getch())
