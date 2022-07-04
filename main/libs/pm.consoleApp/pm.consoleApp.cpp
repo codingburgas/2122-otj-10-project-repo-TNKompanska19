@@ -4,7 +4,7 @@ namespace pm::consoleApp
 {
 	namespace mainMenu
 	{
-		
+		// ================== Functions for figures =============================
 		void computerFigure(int x, int y)
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 9);
@@ -135,7 +135,11 @@ namespace pm::consoleApp
 			pm::tools::consoleCoordinates(x, y + 16);
 			cout << "             @@@@ @@@@";
 		}
+		//===========================================================================================
+		
 
+
+		// Function for going through main menu
 		bool mainMenu()
 		{
 			int counter = 1;
@@ -355,6 +359,7 @@ namespace pm::consoleApp
 
 	namespace registrationForm
 	{
+		// Function for registration
 		void registration()
 		{
 			pm::tools::consoleCoordinates(45, 15);
@@ -383,6 +388,7 @@ namespace pm::consoleApp
 			pm::consoleApp::mainMenu::mainMenu();
 		}
 
+		// Function for logging in
 		void login()
 		{
 			pm::tools::consoleCoordinates(45, 21);
@@ -402,6 +408,7 @@ namespace pm::consoleApp
 
 	namespace userView
 	{
+		// Function for showing options when user is in created projects panel
 		void userOptions(string username)
 		{
 			pm::tools::consoleCoordinates(45, 21);
@@ -523,6 +530,8 @@ namespace pm::consoleApp
 			}
 			}
 		}
+
+		// Function for showing options when user is in created projects panel
 		void createdProjectsOptions(string username)
 		{
 			pm::tools::consoleCoordinates(40, 35);
@@ -651,6 +660,7 @@ namespace pm::consoleApp
 
 	namespace adminView
 	{
+		// Function for showing options when admin is in project panel
 		void projectPanelOptions(string username)
 		{
 			pm::tools::consoleCoordinates(40, 42);
@@ -688,6 +698,8 @@ namespace pm::consoleApp
 			}break;
 			}
 		}
+
+		// Function for showing options when admin is in user panel
 		void userPanelOptions(string username)
 		{
 			pm::tools::consoleCoordinates(40, 42);
@@ -813,6 +825,7 @@ namespace pm::consoleApp
 			}
 		}
 
+		// Function for showing options when admin is in team panel
 		void teamPanelOptions(string username)
 		{
 			pm::tools::consoleCoordinates(40, 46);
@@ -908,6 +921,7 @@ namespace pm::consoleApp
 			}
 		}
 
+		// Function for showing admin options
 		void adminOptions(string username)
 		{
 			pm::tools::consoleCoordinates(45, 21);
