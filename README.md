@@ -7,3 +7,8 @@
    <img src = "https://img.shields.io/github/last-commit/codingburgas/2122-otj-10-project-repo-TNKompanska19?style=for-the-badge">
    <img src = "https://img.shields.io/github/languages/top/codingburgas/2122-otj-10-project-repo-TNKompanska19?style=for-the-badge">
 </p>
+
+<h1 align="center"><i>Welcome to Proteamer!</i></h1>
+<p align="center"><img src="https://i.imgur.com/zowxtnd.png" width="550"></p>
+<p align = "center"> <i> The app that allow you to manage your projects </i> </p>
+
