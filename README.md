@@ -30,4 +30,4 @@
 git clone https://github.com/codingburgas/2122-otj-10-project-repo-TNKompanska19.git
 ```
 
-<h1 align = "center"><b><i>:dizzy: Hope you have fun!!! :dizzy:</i></b></h1>
+<h1 align = "center"><b><i>:dizzy: Hope you enjoy it!!! :dizzy:</i></b></h1>
